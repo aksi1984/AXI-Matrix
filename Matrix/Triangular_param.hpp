@@ -1,0 +1,4 @@
+#ifndef TRIANGULAR_PARAM_H
+#define TRIANGULAR_PARAM_H
+
+#endif // TRIANGULAR_PARAM_H

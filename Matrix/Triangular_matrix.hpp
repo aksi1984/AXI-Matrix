@@ -1,0 +1,4 @@
+#ifndef BOUNDED_MATRIX_H
+#define BOUNDED_MATRIX_H
+
+#endif // BOUNDED_MATRIX_H

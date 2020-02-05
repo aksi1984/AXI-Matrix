@@ -1,0 +1,4 @@
+#ifndef SQUARE_MATRIX_TCC
+#define SQUARE_MATRIX_TCC
+
+#endif // SQUARE_MATRIX_TCC
