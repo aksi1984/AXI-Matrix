@@ -1,57 +1,57 @@
 #ifndef MATRIX_BASE_TCC
 #define MATRIX_BASE_TCC
 
-#include "Matrix_base.hpp"
+#include "Unbounded_matrix.hpp"
 
 
 namespace linarg
 {
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(const allocator_type& alloc) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(const allocator_type& alloc) :
         base(alloc) { }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(size_type reqRows, size_type reqCols, const allocator_type& alloc) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(size_type reqRows, size_type reqCols, const allocator_type& alloc) :
         base(reqRows, reqCols, alloc) { }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(const Matrix_size& mat_size, const allocator_type& alloc) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(const Matrix_size& mat_size, const allocator_type& alloc) :
         base(mat_size, alloc) { }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
         base(random->mat_size(), alloc)
     {
         to_fill_random(random);
     }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(size_type rows, size_type cols, std::function<T()> function) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(size_type rows, size_type cols, std::function<T()> function) :
         base(rows, cols, allocator_type())
     {
         fill_random(function);
     }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(const Matrix_size& size, std::function<T()> function, const allocator_type& alloc) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(const Matrix_size& size, std::function<T()> function, const allocator_type& alloc) :
         base(size.rows_, size.cols_, alloc)
     {
         fill_random(function);
     }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(const Matrix_base<Type, T>& copy) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(const Unbounded_matrix<Type, T>& copy) :
         base(copy) { }
 
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>::Matrix_base(Matrix_base<Type, T>&& move) :
+    Unbounded_matrix<Type, T>::Unbounded_matrix(Unbounded_matrix<Type, T>&& move) :
         base(std::move(move)) { }
 
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>&
-    Matrix_base<Type, T>::operator=(const Matrix_base<Type, T>& rhs)
+    Unbounded_matrix<Type, T>&
+    Unbounded_matrix<Type, T>::operator=(const Unbounded_matrix<Type, T>& rhs)
     {
         base::operator=(rhs);
 
@@ -59,8 +59,8 @@ namespace linarg
     }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>&
-    Matrix_base<Type, T>::operator=(Matrix_base<Type, T>&& rhs)
+    Unbounded_matrix<Type, T>&
+    Unbounded_matrix<Type, T>::operator=(Unbounded_matrix<Type, T>&& rhs)
     {
         base::operator=(std::move(rhs));
         rhs.clear();
@@ -69,8 +69,8 @@ namespace linarg
     }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>&
-    Matrix_base<Type, T>::operator=(rd::Random_base<typename traits::Get_type<traits::is_complex<T>::value, T>::type >* random)
+    Unbounded_matrix<Type, T>&
+    Unbounded_matrix<Type, T>::operator=(rd::Random_base<typename traits::Get_type<traits::is_complex<T>::value, T>::type >* random)
     {
         resize(random->mat_size());
         fill_random(random);
@@ -80,20 +80,20 @@ namespace linarg
 
     template<typename Type, typename T>
     bool
-    Matrix_base<Type, T>::is_square() const noexcept
+    Unbounded_matrix<Type, T>::is_square() const noexcept
     {
         return base::rows() == base::cols();
     }
 
     template<typename Type, typename T>
-    Matrix_base<Type, T>
-    Matrix_base<Type, T>::submat(size_type beg_rows, size_type beg_cols, size_type rows, size_type cols)
+    Unbounded_matrix<Type, T>
+    Unbounded_matrix<Type, T>::submat(size_type beg_rows, size_type beg_cols, size_type rows, size_type cols)
     {
         LINARG_CHECK((beg_rows < base::rows()) && (beg_cols < base::cols()), Out_of_bounds("Submat"))
         LINARG_CHECK((base::rows() > rows) && (base::cols()) > cols, Bad_size("Submat: submatrix size is greather than matrix"))
         LINARG_CHECK((beg_rows + rows < base::rows()) && (beg_cols + cols < base::cols()), Out_of_bounds("Submat"))
 
-        Matrix_base<Type, T> submatrix(rows, cols);
+        Unbounded_matrix<Type, T> submatrix(rows, cols);
 
         for(size_type i = 0, x = beg_rows; i < submatrix.rows() ; ++i, ++x)
         {
@@ -108,36 +108,36 @@ namespace linarg
 
     template<typename Type, typename T>
         template<typename TriType>
-        Trivec<typename Matrix_base<Type, T>::self_type, TriType>
-        Matrix_base<Type, T>::triangle()
+        Trivec<typename Unbounded_matrix<Type, T>::self_type, TriType>
+        Unbounded_matrix<Type, T>::triangle()
         {
-            return Trivec<typename Matrix_base<Type, T>::self_type, TriType>(*this);
+            return Trivec<typename Unbounded_matrix<Type, T>::self_type, TriType>(*this);
         }
 
     template<typename Type, typename T>
-    Diagvec<typename Matrix_base<Type, T>::self_type>
-    Matrix_base<Type, T>::diagonal(int n)
+    Diagvec<typename Unbounded_matrix<Type, T>::self_type>
+    Unbounded_matrix<Type, T>::diagonal(int n)
     {
         return get_diagvec(n);
     }
 
     template<typename Type, typename T>
     void
-    Matrix_base<Type, T>::fill_zeros()
+    Unbounded_matrix<Type, T>::fill_zeros()
     {
         fill(0, traits::is_complex<T>{});
     }
 
     template<typename Type, typename T>
     void
-    Matrix_base<Type, T>::transpose()
+    Unbounded_matrix<Type, T>::transpose()
     {
         algo::transpose(*this);
     }
 
     template<typename Type, typename T>
     void
-    Matrix_base<Type, T>::resize(size_type new_rows, size_type new_cols)
+    Unbounded_matrix<Type, T>::resize(size_type new_rows, size_type new_cols)
     {
         if( (new_rows == 0) && (new_cols == 0) )
         {
@@ -145,7 +145,7 @@ namespace linarg
         }
         else
         {
-            Matrix_base<Type, value_type> temp(new_rows, new_cols, base::get_allocator());
+            Unbounded_matrix<Type, value_type> temp(new_rows, new_cols, base::get_allocator());
 
             size_type r_num = new_rows > base::rows() ? base::rows() : new_rows;
             size_type c_num = new_cols > base::cols() ? base::cols() : new_cols;
@@ -158,7 +158,7 @@ namespace linarg
 
     template<typename Type, typename T>
     void
-    Matrix_base<Type, T>::resize(const Matrix_size& matrix_size)
+    Unbounded_matrix<Type, T>::resize(const Matrix_size& matrix_size)
     {
         resize(matrix_size.rows_, matrix_size.cols_);
     }
@@ -188,14 +188,14 @@ namespace linarg
 
     template<typename Type, typename T>
         template<typename U>
-        void Matrix_base<Type, T>::fill(U value, std::false_type)
+        void Unbounded_matrix<Type, T>::fill(U value, std::false_type)
         {
             for(auto& x : *this) x = value;
         }
 
     template<typename Type, typename T>
         template<typename U>
-        void Matrix_base<Type, T>::fill(U value, std::true_type)
+        void Unbounded_matrix<Type, T>::fill(U value, std::true_type)
         {
             for(auto& x : *this)
             {
@@ -206,7 +206,7 @@ namespace linarg
 
     template<typename Type, typename T>
     void
-    Matrix_base<Type, T>::to_fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random)
+    Unbounded_matrix<Type, T>::to_fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random)
     {
         fill_random(random, traits::is_complex<T>{});
     }
@@ -220,14 +220,14 @@ namespace linarg
 
      template<typename Type, typename T>
      void
-     Matrix_base<Type, T>::fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, std::false_type)
+     Unbounded_matrix<Type, T>::fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, std::false_type)
      {
         for(auto& x : *this) x = random->get();
      }
 
     template<typename Type, typename T>
     void
-    Matrix_base<Type, T>::fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, std::true_type)
+    Unbounded_matrix<Type, T>::fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, std::true_type)
     {
         for(auto& x : *this)
         {
@@ -244,7 +244,7 @@ namespace linarg
 
     template<typename Type, typename T>
         template<typename VectorType>
-        void Matrix_base<Type, T>::copy(const VectorType& vector)
+        void Unbounded_matrix<Type, T>::copy(const VectorType& vector)
         {
             std::copy(vector.cbegin(), vector.cend(), base::data_.begin());
         }
@@ -262,7 +262,7 @@ namespace linarg
 
     template<typename Type, typename T>
         template<typename Tp, typename U>
-        void Matrix_base<Type, T>::copy_from_other_mat(const Matrix_base<Tp, U>& copy)
+        void Unbounded_matrix<Type, T>::copy_from_other_mat(const Unbounded_matrix<Tp, U>& copy)
         {
             for(size_type i = 0; i < base::rows(); ++i)
             {
@@ -275,8 +275,8 @@ namespace linarg
 
 
      template<typename Type, typename T>
-     Diagvec<typename Matrix_base<Type, T>::self_type>
-     Matrix_base<Type, T>::get_diagvec(int n)
+     Diagvec<typename Unbounded_matrix<Type, T>::self_type>
+     Unbounded_matrix<Type, T>::get_diagvec(int n)
      {
          int row_offset = 0;
          int col_offset = 0;

@@ -58,7 +58,7 @@ namespace linarg
 
             using distribution      = Dist;
             using params            = typename distribution::param_type;
-            using result_type       = typename distribution::result_type;
+            using result_type       = typename Random_base<typename Dist::result_type>::result_type;
             using engine            = Engine;
 
             Random(std::size_t n, result_type val) :
@@ -84,6 +84,20 @@ namespace linarg
 
             Random(const Matrix_size& mat_size, result_type min, result_type max) :
                 Random_base<typename Dist::result_type> (mat_size),
+                dist_{params{min, max}}
+            {
+                add_seed();
+            }
+
+            Random(const Square_size& size, result_type val) :
+                Random_base<typename Dist::result_type>(Matrix_size(size.rows_, size.cols_)),
+                dist_{params{val}}
+            {
+                add_seed();
+            }
+
+            Random(const Square_size& size, result_type min, result_type max) :
+                Random_base<typename Dist::result_type>(Matrix_size(size.rows_, size.cols_)),
                 dist_{params{min, max}}
             {
                 add_seed();
@@ -347,6 +361,14 @@ namespace linarg
             assertion<RdType, Rd_spmat>();
 
             return std::shared_ptr<Random<std::uniform_int_distribution<T>, std::mt19937>>(new Random<std::uniform_int_distribution<T>, std::mt19937>(size, min, max));
+        }
+
+        template<typename T, typename = typename std::enable_if<std::is_integral<T>::value>::type>
+        Rd_ptr<T> tr_int_mt19937(const Square_size& size, T min, T max)
+        {
+            //assertion<RdType, Rd_mat>();
+
+            return std::shared_ptr<Random<std::uniform_int_distribution<T>, std::mt19937>>(new Random<std::uniform_int_distribution<T>, std::mt19937>(Matrix_size(size.rows_, size.cols_), min, max));
         }
 
     } // namespace rd

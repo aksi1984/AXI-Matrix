@@ -10,13 +10,15 @@
 #include <list>
 
 
-
 int main()
 {
-    linarg::Matrix<int> M;
-    std::cin >> M;
+    linarg::Square_size size(5);
+    linarg::rd::tr_int_mt19937<int>(size, 1, 9);
+    linarg::Triangular_matrix<int, linarg::Lower> M(linarg::rd::tr_int_mt19937<int>(size, 1, 9));
 
-    std::cout << M;
+
+    //std::cout << M;
+
 
     return 0;
 }

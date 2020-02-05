@@ -56,6 +56,15 @@ namespace linarg
         size_type cols_;
     };
 
+    //////////////////////////////////////////////////////////////////////
+
+    struct Square_size : public Matrix_size
+    {
+        Square_size();
+
+        Square_size(std::size_t size);
+    };
+
 } // namespace Axi
 
 #endif // MAT_SIZE_HPP

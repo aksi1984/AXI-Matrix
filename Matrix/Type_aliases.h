@@ -30,22 +30,6 @@ namespace linarg
     using mersenne19937             = std::mt19937;
     using mersenne19937_64          = std::mt19937_64;
 
-    /*template<typename C>
-    using randui_mt19937        = rd::Random<C, uniform_int<int>, mersenne19937>;
-
-    template<typename C>
-    using randull_mt19937       = rd::Random<C, uniform_int<long long>, mersenne19937>;
-
-    template<typename C>
-    using randrf_mt19937        = rd::Random<C, uniform_real<float>, mersenne19937>;
-
-    template<typename C>
-    using randrd_mt19937        = rd::Random<C, uniform_real<double>, mersenne19937>;
-
-    template<typename C>
-    using randrld_mt19937       = rd::Random<C, uniform_real<long double>, mersenne19937>;*/
-
-
 } // namespace linarg
 
 #endif // TYPE_ALIASES_H

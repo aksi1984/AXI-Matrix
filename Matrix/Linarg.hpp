@@ -5,6 +5,7 @@
 #include "Vector.tcc"
 #include "Matrix.tcc"
 #include "Sparse_matrix.tcc"
+#include "Triangular_matrix.tcc"
 #include "Expression.tcc"
 #include "Minor.tcc"
 #include "Io.hpp"

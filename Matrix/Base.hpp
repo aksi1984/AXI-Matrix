@@ -5,7 +5,6 @@
 #include <math.h>
 
 #include "Arrays.hpp"
-//#include "Vector.hpp"
 #include "Iterator.hpp"
 #include "Math.hpp"
 #include "Algorithms.hpp"
@@ -14,6 +13,7 @@ namespace linarg
 {
     struct Dense_tag { };
     struct Sparse_tag { };
+    struct Triangular_tag { };
     struct Minor_tag { };
 
     template<typename M>
@@ -103,11 +103,11 @@ namespace linarg
             return data_[n];
         }
 
-        reference operator()(size_type i, size_type j);
+        virtual reference operator()(size_type i, size_type j);
 
         const_reference operator()(size_type i, size_type j) const;
 
-        reference at(size_type i, size_type j);
+        virtual reference at(size_type i, size_type j);
 
         const_reference at(size_type i, size_type j) const;
 

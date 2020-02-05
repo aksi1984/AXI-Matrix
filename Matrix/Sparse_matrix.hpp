@@ -1,13 +1,13 @@
 #ifndef SPARSE_MATRIX_HPP
 #define SPARSE_MATRIX_HPP
 
-#include "Matrix_base.hpp"
+#include "Unbounded_matrix.hpp"
 #include "Random.hpp"
 
 namespace linarg
 {
     template<typename T>
-    class Sparse_matrix : public Matrix_base<Sparse_tag, T>
+    class Sparse_matrix : public Unbounded_matrix<Sparse_tag, T>
     {
         static_assert (std::is_arithmetic<T>::value, "Uncorrect type");
 
@@ -15,7 +15,7 @@ namespace linarg
 
 
 
-        using base              = Matrix_base<Sparse_tag, T>;
+        using base              = Unbounded_matrix<Sparse_tag, T>;
         using matrix_type       =  typename base::matrix_type;
 
         using value_type        = typename base::value_type;

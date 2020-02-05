@@ -103,6 +103,13 @@ namespace linarg
         return *this;
     }
 
+    ////////////////////////////////////////////////////////
+
+    Square_size::Square_size() { }
+
+    Square_size::Square_size(std::size_t size) :
+        Matrix_size(size, size) { }
+
 } // namespace linarg
 
 #endif // MATRIX_SIZE_TCC

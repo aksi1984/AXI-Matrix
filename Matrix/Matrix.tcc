@@ -119,16 +119,6 @@ namespace linarg
         return *this;
     }
 
-    /*template<typename T, typename C>
-    Matrix<T, C>&
-    Matrix<T, C>::operator=(rd::Random_base<typename traits::Get_type<traits::is_complex<T>::value, T>::type >* random)
-    {
-        resize(random->mat_size());
-        fill_random(random);
-
-        return *this;
-    }*/
-
     template<typename T>
     void
     Matrix<T>::fill_ones()
@@ -312,12 +302,6 @@ namespace linarg
         {
             for(auto& x : *this) x = function();
         }
-
-    /*template<typename T, typename C>
-    void Matrix<T, C>::copy(const Base<T, C>& matrix_base)
-    {
-        std::copy(matrix_base.cbegin(), matrix_base.cend(), this->begin());
-    }*/
 
     template<typename T>
         template<typename VectorType>

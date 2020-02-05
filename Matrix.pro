@@ -25,8 +25,6 @@ HEADERS += \
     Matrix/Math.hpp \
     Matrix/Matrix.hpp \
     Matrix/Matrix.tcc \
-    Matrix/Matrix_base.hpp \
-    Matrix/Matrix_base.tcc \
     Matrix/Matrix_initializer.hpp \
     Matrix/Matrix_initializer.tcc \
     Matrix/Matrix_size.hpp \
@@ -40,8 +38,13 @@ HEADERS += \
     Matrix/Sparse_matrix.hpp \
     Matrix/Sparse_matrix.tcc \
     Matrix/Traits.hpp \
+    Matrix/Triangular_matrix.hpp \
+    Matrix/Triangular_matrix.tcc \
+    Matrix/Triangular_param.hpp \
     Matrix/Trivec.hpp \
     Matrix/Type_aliases.h \
+    Matrix/Unbounded_matrix.hpp \
+    Matrix/Unbounded_matrix.tcc \
     Matrix/Vector.hpp \
     Matrix/Vector.tcc
 

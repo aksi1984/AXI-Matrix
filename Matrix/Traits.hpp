@@ -66,6 +66,39 @@ namespace linarg
             using type = T;
         };
 
+        template<bool Cond, typename T>
+        struct Type_of_random
+        {
+            using type = T;
+        };
+
+        template<typename T>
+        struct Type_of_random<false, T>
+        {
+            using element_type = typename T::element_type;
+            using type = typename element_type::result_type;
+        };
+
+        template<typename T>
+        struct Arithmetic_value
+        {
+            static T get(T value)
+            {
+                return value;
+            }
+        };
+
+        template<typename T>
+        struct Non_arithmetic_value
+        {
+            using element_type = typename T::element_type;
+            using type = typename element_type::result_type;
+
+            static type get(T struct_type)
+            {
+                return  struct_type->get();
+            }
+        };
     }
 }
 
