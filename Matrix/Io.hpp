@@ -3,6 +3,8 @@
 
 #include "Base.hpp"
 #include "Vector.hpp"
+#include "Triangular_param.hpp"
+#include "Algorithms.hpp"
 
 #include <iostream>
 #include <complex>
@@ -11,37 +13,8 @@
 
 namespace linarg
 {
-
-    /*! \brief Output stream operator for matrices.
-     *
-     *  The matrices can be written in output stream by
-     *  std::basic_ostream& operator. For example:
-     *
-     *  \code
-     *  Matrix<double> M
-     *  {
-     *      {1.0, 2.0, 3.0},
-     *      {4.0, 5.0, 6.0}
-     *  }
-     *
-     *  std::cout << M;
-     *  \endcode
-     *
-     *  Will display:
-     *  \code
-     *  Matrix (2,3)
-     *
-     *  1.0 2.0 3.0
-     *  4.0 5.0 6.0
-     *  \endcode
-     *
-     *  \param os Output stream.
-     *  \param mat Matrix.
-     *  \return A reference to the output stream.
-     *
-     */
     template<typename Char, typename Traits, typename M>
-    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, M mat)
+    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const M& mat)
     {
         using size_type = typename M::size_type;
         using mat_type = typename M::matrix_type;
@@ -57,11 +30,16 @@ namespace linarg
             name = "Sparse matrix";
             std::string density_str = "\nDensity";
             std::string non_zeros_str = "\nNon zeros";
+
+            std::size_t zeros = algo::zeros(mat);
+            std::size_t non_zeros = mat.size().total() - zeros;
+            double density = (static_cast<double>(non_zeros) / static_cast<double>(mat.size().total())) * 100.0;
+
             text.insert(0, name);
 
             ost << std::fixed << text << density_str << std::setw(4)
-                << std::setfill(' ') << ":" << mat.density() << "%" << non_zeros_str
-                << std::setw(2) << std::setfill(' ') << ":" << mat.non_zeros() << "\n\n";
+                << std::setfill(' ') << ":" << density << "%" << non_zeros_str
+                << std::setw(2) << std::setfill(' ') << ":" << non_zeros;
 
         }
         else if constexpr(std::is_same<mat_type, Dense_tag>::value)
@@ -70,8 +48,17 @@ namespace linarg
             text.insert(0, name);
             ost << text;
         }
+        else if constexpr(std::is_same<mat_type, Triangular_tag>::value)
+        {
+            using triangular_type = typename M::triangular_type;
 
-        os << ost.str();
+            std::string triangular_type_text = ( std::is_same<triangular_type, Upper>::value ? "upper" : "lower");
+            name = "Triangular matrix";
+            text.insert(0, name);
+            ost << text << '\n' << "Triangular type" << std::setw(2) << std::setfill(' ') << ':' << triangular_type_text;
+        }
+
+        os << ost.str() << "\n\n";
 
 
         for(size_type i = 0; i < mat.rows(); ++i)

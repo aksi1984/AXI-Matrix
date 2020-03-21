@@ -14,6 +14,7 @@ namespace linarg
     struct Dense_tag { };
     struct Sparse_tag { };
     struct Triangular_tag { };
+    struct Diagonal_tag { };
     struct Minor_tag { };
 
     template<typename M>
@@ -105,7 +106,7 @@ namespace linarg
 
         virtual reference operator()(size_type i, size_type j);
 
-        const_reference operator()(size_type i, size_type j) const;
+        virtual const_reference operator()(size_type i, size_type j) const;
 
         virtual reference at(size_type i, size_type j);
 

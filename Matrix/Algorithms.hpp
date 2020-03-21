@@ -233,6 +233,22 @@ namespace linarg
             m = std::move(mat);
         }
 
+        template<typename M>
+        std::size_t zeros(M mat)
+        {
+            std::size_t count = 0;
+
+            for(auto x : mat)
+            {
+                if(x == 0)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
     } // namespace algo
 
 } // namespace axi

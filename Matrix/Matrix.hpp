@@ -25,7 +25,6 @@ namespace linarg
         using base            = Unbounded_matrix<Dense_tag, T>;
         using self_type       = Matrix<T>;
         using matrix_type     = typename base::matrix_type;
-
         using value_type      = typename base::value_type;
         using reference       = typename base::reference;
         using const_reference = typename base::const_reference;

@@ -85,6 +85,13 @@ namespace linarg
                                                   "must be in the [0, 100] interval") { }
     };
 
+    struct Bad_index : public Exception_base<std::logic_error>
+    {
+        Bad_index(std::size_t i, std::size_t j, const std::string& m) :
+            Exception_base<std::logic_error>("Bad index (" + std::to_string(i) + ", " +
+                                              std::to_string(j) + ") " + m) { }
+    };
+
 } // namespace linarg
 
 #endif // EXCEPTION_HPP

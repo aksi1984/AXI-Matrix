@@ -13,6 +13,7 @@ HEADERS += \
     Matrix/Base.tcc \
     Matrix/Container.hpp \
     Matrix/Conversions.hpp \
+    Matrix/Diagonal_matrix.hpp \
     Matrix/Diagvec.hpp \
     Matrix/Enums.hpp \
     Matrix/Exception.hpp \

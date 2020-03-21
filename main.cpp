@@ -13,11 +13,10 @@
 int main()
 {
     linarg::Square_size size(5);
-    linarg::rd::tr_int_mt19937<int>(size, 1, 9);
-    linarg::Triangular_matrix<int, linarg::Lower> M(linarg::rd::tr_int_mt19937<int>(size, 1, 9));
+    linarg::rd::sp_int_mt19937<int, linarg::rd::Rd_spmat>(size, 1, 9) ;
+    linarg::Triangular_matrix<int, linarg::Upper> M(linarg::rd::tr_int_mt19937<int>(size, 1, 9));
 
 
-    //std::cout << M;
 
 
     return 0;

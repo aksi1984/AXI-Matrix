@@ -12,10 +12,10 @@ namespace linarg
     private:
 
         using self_type         = Triangular_matrix<T, Tr>;
-        using triangular_type   = Tr;
 
     public:
 
+        using triangular_type   = Tr;
         using base            = Base<Triangular_tag, T, Array<T>>;
         using matrix_type     = typename base::matrix_type;
         using value_type      = typename base::value_type;
@@ -36,15 +36,21 @@ namespace linarg
 
         explicit Triangular_matrix(size_type size, std::function<T> func, const allocator_type& alloc = allocator_type());
 
+        Triangular_matrix(const Triangular_matrix& copy);
+
+        Triangular_matrix(Triangular_matrix&& move);
+
         Triangular_matrix& operator=(const Triangular_matrix& rhs);
 
         Triangular_matrix& operator=(Triangular_matrix&& rhs);
 
         Triangular_matrix& operator=(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random);
 
-        Triangular_matrix& operator=(const std::vector<T>& rhs);
+        virtual reference operator()(size_type i, size_type j) override;
 
-        Triangular_matrix& operator=(const Vector<T>& rhs);
+        virtual const_reference operator()(size_type i, size_type j) const override;
+
+        virtual reference at(size_type i, size_type j) override;
     };
 
 } // namespace linarg

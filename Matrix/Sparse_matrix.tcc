@@ -28,46 +28,11 @@ namespace linarg
         LINARG_CHECK(((density_ >= 0.0) && (density_ <= 100.0)), Invalid_density(density_))
 
         fill_random(random, std::integral_constant<bool, false>{});
-        check_values();
-    }
-
-    template<typename T>
-    double
-    Sparse_matrix<T>::Sparse_matrix::density() noexcept
-    {
-        check_density();
-
-        return density_;
-    }
-
-    template<typename T>
-    typename Sparse_matrix<T>::size_type
-    Sparse_matrix<T>::zeros() noexcept
-    {
-        check_values();
-
-        return zeros_;
-    }
-
-    template<typename T>
-    typename Sparse_matrix<T>::size_type
-    Sparse_matrix<T>::non_zeros() noexcept
-    {
-        check_values();
-
-        return non_zeros_;
     }
 
     ////////////////////////////////////////
-
-    template<typename T>
-    void
-    Sparse_matrix<T>::set_value(size_type i, size_type j, value_type value)
-    {
-        base::operator()(i, j) = value;
-        check_values();
-    }
-
+    ///
+    ///
     template<typename T>
     void
     Sparse_matrix<T>::fill_random(rd::Rd_ptr<T> random, std::false_type)
@@ -78,36 +43,6 @@ namespace linarg
         {
             base::operator[](locations[i]) = random->get();
         }
-    }
-
-    template<typename T>
-    void
-    Sparse_matrix<T>::check_values()
-    {
-        size_type zeros_count = 0;
-        size_type non_zeros_count = 0;
-
-        for(auto x : *this)
-        {
-            if(x == 0)
-            {
-                zeros_count++;
-            }
-            else
-            {
-                non_zeros_count++;
-            }
-        }
-
-        zeros_ = zeros_count;
-        non_zeros_ = non_zeros_count;
-    }
-
-    template<typename T>
-    void
-    Sparse_matrix<T>::check_density()
-    {
-        density_ = (static_cast<double>(non_zeros()) / static_cast<double>(base::size().total())) * 100.0;
     }
 
 } // namespace linarg
