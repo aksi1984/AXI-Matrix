@@ -13,7 +13,6 @@ HEADERS += \
     Matrix/Base.tcc \
     Matrix/Container.hpp \
     Matrix/Conversions.hpp \
-    Matrix/Diagonal_matrix.hpp \
     Matrix/Diagvec.hpp \
     Matrix/Enums.hpp \
     Matrix/Exception.hpp \
@@ -39,9 +38,9 @@ HEADERS += \
     Matrix/Sparse_matrix.hpp \
     Matrix/Sparse_matrix.tcc \
     Matrix/Traits.hpp \
+    Matrix/Triangular_data.hpp \
     Matrix/Triangular_matrix.hpp \
     Matrix/Triangular_matrix.tcc \
-    Matrix/Triangular_param.hpp \
     Matrix/Trivec.hpp \
     Matrix/Type_aliases.h \
     Matrix/Unbounded_matrix.hpp \

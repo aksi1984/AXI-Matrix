@@ -9,15 +9,14 @@
 #include <regex>
 #include <list>
 
+struct Foo;
 
 int main()
 {
-    linarg::Square_size size(5);
-    linarg::rd::sp_int_mt19937<int, linarg::rd::Rd_spmat>(size, 1, 9) ;
-    linarg::Triangular_matrix<int, linarg::Upper> M(linarg::rd::tr_int_mt19937<int>(size, 1, 9));
+    linarg::Vector<int> vector{1,2,3,4};
 
-
-
+    linarg::Triangular_matrix<int, linarg::Diagonal> M(vector);
+    std::cout << M;
 
     return 0;
 }

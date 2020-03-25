@@ -13,8 +13,6 @@ namespace linarg
 
     public:
 
-
-
         using base              = Unbounded_matrix<Sparse_tag, T>;
         using matrix_type       =  typename base::matrix_type;
 

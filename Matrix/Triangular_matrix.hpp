@@ -2,29 +2,32 @@
 #define DIAGONAL_MATRIX_HPP
 
 #include "Base.hpp"
-#include "Triangular_param.hpp"
+#include "Triangular_data.hpp"
 
 namespace linarg
 {
     template<typename T, typename Tr>
     class Triangular_matrix : public Base<Triangular_tag, T, Array<T>>
     {
+        static_assert (traits::is_one_of<Tr, Lower, Upper, Diagonal>(),
+                       "Ivalid type of second parameter- must be one of: Lower, Upper or Diagonal.");
+
     private:
 
         using self_type         = Triangular_matrix<T, Tr>;
 
     public:
 
-        using triangular_type   = Tr;
-        using base            = Base<Triangular_tag, T, Array<T>>;
-        using matrix_type     = typename base::matrix_type;
-        using value_type      = typename base::value_type;
-        using reference       = typename base::reference;
-        using const_reference = typename base::const_reference;
-        using pointer         = typename base::pointer;
-        using const_pointer   = typename base::const_pointer;
-        using size_type       = typename base::size_type;
-        using allocator_type  = typename base::allocator_type;
+        using triangular_fill_type = Tr;
+        using base                 = Base<Triangular_tag, T, Array<T>>;
+        using matrix_type          = typename base::matrix_type;
+        using value_type           = typename base::value_type;
+        using reference            = typename base::reference;
+        using const_reference      = typename base::const_reference;
+        using pointer              = typename base::pointer;
+        using const_pointer        = typename base::const_pointer;
+        using size_type            = typename base::size_type;
+        using allocator_type       = typename base::allocator_type;
 
         explicit Triangular_matrix(const allocator_type& alloc = allocator_type());
 
@@ -35,6 +38,8 @@ namespace linarg
         explicit Triangular_matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
 
         explicit Triangular_matrix(size_type size, std::function<T> func, const allocator_type& alloc = allocator_type());
+
+        explicit Triangular_matrix(const Vector<T>& vector, const allocator_type& alloc = allocator_type());
 
         Triangular_matrix(const Triangular_matrix& copy);
 

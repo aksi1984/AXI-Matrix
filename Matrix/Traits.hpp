@@ -99,6 +99,12 @@ namespace linarg
                 return  struct_type->get();
             }
         };
+
+        template<typename T, typename... Ts>
+        constexpr bool is_one_of()
+        {
+            return (std::is_same_v<T, Ts> || ...);
+        }
     }
 }
 

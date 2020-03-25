@@ -4,12 +4,8 @@
 #include <functional>
 #include <complex>
 
-//#include "Diagvec.hpp"
-//#include "Trivec.hpp"
 #include "Expression.hpp"
 #include "Matrix_initializer.hpp"
-//#include "Operations.hpp"
-//#include "Random.hpp"
 #include "Unbounded_matrix.tcc"
 
 

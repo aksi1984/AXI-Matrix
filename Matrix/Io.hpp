@@ -3,7 +3,7 @@
 
 #include "Base.hpp"
 #include "Vector.hpp"
-#include "Triangular_param.hpp"
+#include "Triangular_data.hpp"
 #include "Algorithms.hpp"
 
 #include <iostream>
@@ -50,12 +50,13 @@ namespace linarg
         }
         else if constexpr(std::is_same<mat_type, Triangular_tag>::value)
         {
-            using triangular_type = typename M::triangular_type;
+            using triangular_type = typename M::triangular_fill_type;
 
-            std::string triangular_type_text = ( std::is_same<triangular_type, Upper>::value ? "upper" : "lower");
+
+            std::string triangular_type_text = ( std::is_same<triangular_type, Upper>::value ? "upper" : (std::is_same<triangular_type, Lower>::value ? "lower" : "diagonal") );
             name = "Triangular matrix";
             text.insert(0, name);
-            ost << text << '\n' << "Triangular type" << std::setw(2) << std::setfill(' ') << ':' << triangular_type_text;
+            ost << text << '\n' << "Type" << std::setw(2) << std::setfill(' ') << ": " << triangular_type_text;
         }
 
         os << ost.str() << "\n\n";

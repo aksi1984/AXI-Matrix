@@ -30,9 +30,7 @@ namespace linarg
         fill_random(random, std::integral_constant<bool, false>{});
     }
 
-    ////////////////////////////////////////
-    ///
-    ///
+
     template<typename T>
     void
     Sparse_matrix<T>::fill_random(rd::Rd_ptr<T> random, std::false_type)

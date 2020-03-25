@@ -13,7 +13,8 @@ namespace linarg
     Triangular_matrix<T, Tr>::Triangular_matrix(size_type size, const allocator_type& alloc) :
         base(size, size, alloc)
     {
-        triangular_type::fill(base::rows(), base::cols(), *this, 1);
+
+        triangular_fill_type::fill(base::rows(), base::cols(), base::data_, 1, std::integral_constant<bool, false>{});
     }
 
     template<typename T, typename Tr>
@@ -24,14 +25,23 @@ namespace linarg
     Triangular_matrix<T, Tr>::Triangular_matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
         base(random->mat_size(), alloc)
     {
-        triangular_type::fill(base::rows(), base::cols(), base::data_, random);
+        triangular_fill_type::fill(base::rows(), base::cols(), base::data_, random, std::integral_constant<bool, false>{});
     }
 
     template<typename T, typename Tr>
     Triangular_matrix<T, Tr>::Triangular_matrix(size_type size, std::function<T> func, const allocator_type& alloc) :
         base(size, size, alloc)
     {
-        triangular_type::fill(base::rows(), base::cols(), base::data_, func);
+        triangular_fill_type::fill(base::rows(), base::cols(), base::data_, func, std::integral_constant<bool, false>{});
+    }
+
+    template<typename T, typename Tr>
+    Triangular_matrix<T, Tr>::Triangular_matrix(const Vector<T>& vector, const allocator_type& alloc) :
+        base(vector.size(), vector.size(), alloc)
+    {
+        static_assert (std::is_same_v<Tr, Diagonal>, "For this contructor the matrix must be diagonal.");
+
+        triangular_fill_type::fill(base::rows(), base::cols(), base::data_, vector, std::integral_constant<bool, true>{});
     }
 
     template<typename T, typename Tr>
