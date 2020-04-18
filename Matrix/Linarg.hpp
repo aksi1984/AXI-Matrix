@@ -9,6 +9,6 @@
 #include "Expression.tcc"
 #include "Minor.tcc"
 #include "Io.hpp"
-#include "Type_aliases.h"
+#include "Aliases.h"
 
 #endif // LINARG_HPP

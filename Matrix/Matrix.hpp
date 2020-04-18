@@ -14,7 +14,7 @@ namespace linarg
     template<typename T>
     class Matrix : public Unbounded_matrix<Dense_tag, T>
     {
-        static_assert (std::is_arithmetic<T>::value || traits::is_complex<T>::value, "Uncorrect type");
+        static_assert (std::is_arithmetic<T>::value || is_complex<T>::value, "Uncorrect type");
 
     public:
 
@@ -36,7 +36,8 @@ namespace linarg
 
         explicit Matrix(const Matrix_size& mat_size, const allocator_type& alloc = allocator_type());
 
-        explicit Matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
+        template<typename U>
+        explicit Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc = allocator_type());
 
         explicit Matrix(List<value_type> list, const allocator_type& alloc = allocator_type());
 
@@ -77,8 +78,6 @@ namespace linarg
         Matrix& operator=(List<value_type> list);
 
         Matrix& operator=(List_of_lists<value_type> list);
-
-        Matrix& operator=(rd::Random_base<typename traits::Get_type<traits::is_complex<T>::value, T>::type >* random);
 
         void fill_ones();
 

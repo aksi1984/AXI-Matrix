@@ -9,7 +9,7 @@ namespace linarg
     struct Lower_triangle { };
 
     template<typename M, typename TriType>
-    class Trivec : public Vector<typename M::value_type>
+    class Triangular_elems : public Vector<typename M::value_type>
     {
     public:
 
@@ -17,9 +17,9 @@ namespace linarg
         using value_type    = typename base::value_type;
         using size_type     = typename base::size_type;
 
-        Trivec() { }
+        Triangular_elems() { }
 
-        Trivec(const M& mat) :
+        Triangular_elems(const M& mat) :
             base( ((mat.rows() * mat.cols()) - mat.rows()) / 2 )
         {
             if(mat.is_square())

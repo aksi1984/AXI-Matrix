@@ -487,10 +487,6 @@ namespace linarg
 
     template<typename Iterator>
     std::size_t matrix_diag_iterator<Iterator>::rows_count_;
-
-
-
-
 }
 
 #endif // ITERATOR_HPP

@@ -22,11 +22,19 @@ namespace linarg
         self_type(size.rows_, alloc) { }
 
     template<typename T, typename Tr>
-    Triangular_matrix<T, Tr>::Triangular_matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
+        template<typename U>
+        Triangular_matrix<T, Tr>::Triangular_matrix(size_type req_size, Random<U> random, const allocator_type& alloc) :
+            base(req_size, req_size, alloc)
+        {
+            triangular_fill_type::fill(base::rows(), base::cols(), base::data_, random, std::integral_constant<bool, false>{});
+        }
+
+    /*template<typename T, typename Tr>
+    Triangular_matrix<T, Tr>::Triangular_matrix(Random_ptr<typename traits::Get_type<is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
         base(random->mat_size(), alloc)
     {
-        triangular_fill_type::fill(base::rows(), base::cols(), base::data_, random, std::integral_constant<bool, false>{});
-    }
+        //triangular_fill_type::fill(base::rows(), base::cols(), base::data_, random, std::integral_constant<bool, false>{});
+    }*/
 
     template<typename T, typename Tr>
     Triangular_matrix<T, Tr>::Triangular_matrix(size_type size, std::function<T> func, const allocator_type& alloc) :

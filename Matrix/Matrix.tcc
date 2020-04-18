@@ -16,8 +16,9 @@ namespace linarg
         base(mat_size, alloc) { }
 
     template<typename T>
-    Matrix<T>::Matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
-        base(random, alloc) { }
+        template<typename U>
+        Matrix<T>::Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc) :
+            base(req_rows, req_cols, random, alloc) { }
 
     template<typename T>
     Matrix<T>::Matrix(List<value_type> list, const allocator_type& alloc) :
@@ -123,7 +124,7 @@ namespace linarg
     void
     Matrix<T>::fill_ones()
     {
-        base::fill(1, traits::is_complex<T>{});
+        base::fill(1, is_complex<T>{});
     }
 
     template<typename T>

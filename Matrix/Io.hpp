@@ -19,7 +19,7 @@ namespace linarg
         using size_type = typename M::size_type;
         using mat_type = typename M::matrix_type;
 
-        std::string text = " (" + std::to_string(mat.rows()) + ", " + std::to_string(mat.rows()) + ")\n";
+        std::string text = " (" + std::to_string(mat.rows()) + ", " + std::to_string(mat.cols()) + ")\n";
         std::string name;
 
         std::ostringstream ost;

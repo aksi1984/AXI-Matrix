@@ -7,16 +7,13 @@
 
 #include "Operations.hpp"
 #include "Traits.hpp"
-#include "Type_aliases.h"
+#include "Cond.hpp"
+#include "Aliases.h"
 #include "Iterator.hpp"
 #include "Base.hpp"
 
 namespace linarg
 {
-    template<typename T>
-    using Random_ptr = std::shared_ptr<rd::Random_base<T>>;
-
-
 
     template<typename T, typename C = Unbounded_array<T>>
     class Vector
@@ -27,7 +24,7 @@ namespace linarg
 
     public:
 
-        using storage_type            = Unbounded_array<T>;
+        using storage_type              = Unbounded_array<T>;
         using value_type                = typename storage_type::value_type;
         using reference                 = typename storage_type::reference;
         using const_reference           = typename storage_type::const_reference;
@@ -42,16 +39,13 @@ namespace linarg
 
         explicit Vector(const allocator_type& alloc = allocator_type{});
 
-
         explicit Vector(size_type n, value_type v = {}, const allocator_type& alloc = allocator_type{});
-
 
         explicit Vector(List<value_type> list, const allocator_type& alloc = allocator_type{});
 
         explicit Vector(const std::string& expression, const allocator_type& alloc = allocator_type());
 
-
-        explicit Vector(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type{});
+        explicit Vector(size_type req_size, Random<typename traits::Get_type<is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
 
 
         Vector(const Vector& copy);
@@ -68,8 +62,7 @@ namespace linarg
 
         Vector& operator=(const List<value_type>& list);
 
-
-        Vector& operator=(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random);
+        Vector& operator=(Random<typename traits::Get_type<is_complex<T>::value, T>::type> rhs);
 
 
         iterator begin();
@@ -141,11 +134,7 @@ namespace linarg
 
     private:
 
-        template<typename R>
-        void fill_random(R random, std::true_type);
-
-        template<typename R>
-        void fill_random(R random, std::false_type);
+        void take_random_values(Random<typename traits::Get_type<is_complex<T>::value, T>::type> random);
 
         storage_type data_;
     };

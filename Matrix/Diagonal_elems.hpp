@@ -6,7 +6,7 @@
 namespace linarg
 {
     template<typename M>
-    class Diagvec : public Array<typename M::value_type>
+    class Diagonal_elems : public Array<typename M::value_type>
     {
     public:
 
@@ -15,13 +15,13 @@ namespace linarg
         using size_type     = typename M::size_type;
 
 
-        Diagvec(size_type size, const M& mat, size_type row, size_type col) :
+        Diagonal_elems(size_type size, const M& mat, size_type row, size_type col) :
             base_type(size)
         {
             make_vec(mat, row, col);
         }
 
-        friend std::ostream& operator<<(std::ostream& os, Diagvec diagvec)
+        friend std::ostream& operator<<(std::ostream& os, Diagonal_elems diagvec)
         {
             for(size_type i = 0; i < diagvec.size(); ++i)
             {

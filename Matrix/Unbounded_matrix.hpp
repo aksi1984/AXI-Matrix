@@ -3,7 +3,7 @@
 
 #include "Base.tcc"
 #include "Arrays.hpp"
-#include "Diagvec.hpp"
+#include "Diagonal_elems.hpp"
 #include "Trivec.hpp"
 #include "Random.hpp"
 #include "Operations.hpp"
@@ -33,7 +33,12 @@ namespace linarg
 
         explicit Unbounded_matrix(const Matrix_size& mat_size, const allocator_type& alloc = allocator_type());
 
-        explicit Unbounded_matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
+
+
+        //explicit Unbounded_matrix(Random_ptr<typename traits::Get_type<is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
+
+        template<typename U, typename = std::enable_if_t< std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type> >>
+        explicit Unbounded_matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc = allocator_type());
 
         Unbounded_matrix(size_type rows, size_type cols, std::function<T()> function);
 
@@ -49,16 +54,11 @@ namespace linarg
 
         Unbounded_matrix& operator=(Unbounded_matrix&& rhs);
 
-        Unbounded_matrix& operator=(rd::Random_base<typename traits::Get_type<traits::is_complex<T>::value, T>::type >* random);
-
         bool is_square() const noexcept;
 
         Unbounded_matrix<Type, T> submat(size_type beg_row, size_type beg_col, size_type rows, size_type cols);
 
-        template<typename TriType>
-        Trivec<self_type, TriType> triangle();
-
-        Diagvec<self_type> diagonal(int n = 0);
+        Diagonal_elems<self_type> diagonal(int n = 0);
 
         void fill_zeros();
 
@@ -70,22 +70,18 @@ namespace linarg
 
     protected:
 
-        template<typename U = typename traits::Get_type<traits::is_complex<T>::value, T>::type>
+        template<typename U = typename traits::Get_type<is_complex<T>::value, T>::type>
         void fill(U value, std::false_type);
 
-        template<typename U = typename traits::Get_type<traits::is_complex<T>::value, T>::type>
+        template<typename U = typename traits::Get_type<is_complex<T>::value, T>::type>
         void fill(U value, std::true_type);
+
+        void take_random_values(Random<typename traits::Get_type<is_complex<T>::value, T>::type> random);
 
     private:
 
         template<typename R>
         void fill_random(R random);
-
-        virtual void to_fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random);
-
-        void fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, std::true_type);
-
-        virtual void fill_random(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, std::false_type);
 
         void copy(const Base<Type, T, Unbounded_array<T>>& matrix_base);
 
@@ -98,7 +94,7 @@ namespace linarg
         template<typename Tp, typename U>
         void copy_from_other_mat(const Unbounded_matrix<Tp, U>& mat);
 
-        Diagvec<self_type> get_diagvec(int n);
+        Diagonal_elems<self_type> get_diagvec(int n);
 
     };
 

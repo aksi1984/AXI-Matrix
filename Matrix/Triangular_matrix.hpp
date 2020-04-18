@@ -6,6 +6,7 @@
 
 namespace linarg
 {
+
     template<typename T, typename Tr>
     class Triangular_matrix : public Base<Triangular_tag, T, Array<T>>
     {
@@ -35,7 +36,8 @@ namespace linarg
 
         explicit Triangular_matrix(const Square_size& size, const allocator_type& alloc = allocator_type());
 
-        explicit Triangular_matrix(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
+        template<typename U>
+        explicit Triangular_matrix(size_type size, Random<U> random, const allocator_type& alloc = allocator_type());
 
         explicit Triangular_matrix(size_type size, std::function<T> func, const allocator_type& alloc = allocator_type());
 
@@ -48,8 +50,6 @@ namespace linarg
         Triangular_matrix& operator=(const Triangular_matrix& rhs);
 
         Triangular_matrix& operator=(Triangular_matrix&& rhs);
-
-        Triangular_matrix& operator=(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random);
 
         virtual reference operator()(size_type i, size_type j) override;
 

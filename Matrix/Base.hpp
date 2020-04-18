@@ -8,6 +8,7 @@
 #include "Iterator.hpp"
 #include "Math.hpp"
 #include "Algorithms.hpp"
+#include "Cond.hpp"
 
 namespace linarg
 {

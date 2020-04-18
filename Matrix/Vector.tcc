@@ -37,10 +37,10 @@ namespace linarg
     }
 
     template<typename T, typename C>
-    Vector<T, C>::Vector(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
-        data_(random->vec_size(), 0, alloc)
+    Vector<T, C>::Vector(size_type req_size, Random<typename traits::Get_type<is_complex<T>::value, T>::type> random, const allocator_type& alloc) :
+        data_(req_size, 0, alloc)
     {
-        fill_random(random, traits::is_complex<T>{});
+        take_random_values(random);
     }
 
     template<typename T, typename C>
@@ -77,10 +77,16 @@ namespace linarg
 
     template<typename T, typename C>
     Vector<T, C>&
-    Vector<T, C>::operator=(Random_ptr<typename traits::Get_type<traits::is_complex<T>::value, T>::type> random)
+    Vector<T, C>::operator=(Random<typename traits::Get_type<is_complex<T>::value, T>::type> rhs)
     {
-        data_.resize(random->size());
-        fill_random(random);
+        auto sz = std::get<1>(rhs.size());
+
+        if((size() != sz))
+        {
+            data_.resize(std::get<1>(rhs.size()));
+        }
+
+        take_random_values(rhs);
 
         return *this;
     }
@@ -265,24 +271,31 @@ namespace linarg
     }
 
     template<typename T, typename C>
-        template<typename R>
-        void
-        Vector<T, C>::fill_random(R random, std::true_type)
+    void
+    Vector<T, C>::take_random_values(Random<typename traits::Get_type<is_complex<T>::value, T>::type> random)
+    {
+        size_type sz = is_complex<T>{} ? data_.size() * 2 : data_.size();
+        random.apply_size(sz);
+        auto values = random.get();
+
+        size_type count = 0;
+
+        if constexpr(is_complex<T>{})
         {
-            for(auto& x : data_)
+            for(auto& x : *this)
             {
-                x.real(random->get());
-                x.imag(random->get());
+                x.real(values[count++]);
+                x.imag(values[count++]);
             }
         }
-
-    template<typename T, typename C>
-        template<typename R>
-        void
-        Vector<T, C>::fill_random(R random, std::false_type)
+        else
         {
-            for(auto& x : data_) x = random->get();
+            for(auto& x : *this)
+            {
+                x = values[count++];
+            }
         }
+    }
 
     // Ops
 

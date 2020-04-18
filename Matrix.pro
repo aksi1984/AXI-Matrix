@@ -8,12 +8,14 @@ SOURCES += \
 
 HEADERS += \
     Matrix/Algorithms.hpp \
+    Matrix/Aliases.h \
     Matrix/Arrays.hpp \
     Matrix/Base.hpp \
     Matrix/Base.tcc \
+    Matrix/Cond.hpp \
     Matrix/Container.hpp \
     Matrix/Conversions.hpp \
-    Matrix/Diagvec.hpp \
+    Matrix/Diagonal_elems.hpp \
     Matrix/Enums.hpp \
     Matrix/Exception.hpp \
     Matrix/Expression.hpp \
@@ -42,7 +44,6 @@ HEADERS += \
     Matrix/Triangular_matrix.hpp \
     Matrix/Triangular_matrix.tcc \
     Matrix/Trivec.hpp \
-    Matrix/Type_aliases.h \
     Matrix/Unbounded_matrix.hpp \
     Matrix/Unbounded_matrix.tcc \
     Matrix/Vector.hpp \

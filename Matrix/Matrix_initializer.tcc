@@ -33,7 +33,7 @@ namespace linarg
         std::size_t rows = container.size();
         std::vector<std::size_t> cols_num(rows);
 
-        using sub_container = typename traits::is_list<T, typename C::value_type>::type;
+        using sub_container = typename is_initializer_list<T, typename C::value_type>::type;
 
         std::transform(container.begin(), container.end(), cols_num.begin(), [](sub_container sc){ return sc.size(); });
 

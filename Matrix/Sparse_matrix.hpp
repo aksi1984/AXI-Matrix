@@ -30,11 +30,9 @@ namespace linarg
 
         explicit Sparse_matrix(const Matrix_size& size, const allocator_type& alloc = allocator_type());
 
-        explicit Sparse_matrix(rd::Rd_ptr<T> random, double dens, const allocator_type& alloc = allocator_type());
+        explicit Sparse_matrix(size_type req_rows, size_type req_cols, double dens, Random<T> random, const allocator_type& alloc = allocator_type());
 
     private:
-
-        virtual void fill_random(rd::Rd_ptr<T> random, std::false_type) override;
 
         double density_;
         size_type zeros_;

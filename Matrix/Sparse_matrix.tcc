@@ -21,25 +21,19 @@ namespace linarg
         Sparse_matrix<T>(size.rows_, size.cols_, alloc) { }
 
     template<typename T>
-    Sparse_matrix<T>::Sparse_matrix(rd::Rd_ptr<T> random, double dens, const allocator_type& alloc) :
-        base(random->mat_size(), alloc),
-        density_(dens)
+    Sparse_matrix<T>::Sparse_matrix(size_type req_rows, size_type req_cols, double dens, Random<T> random, const allocator_type& alloc) :
+        base(req_rows, req_cols, alloc)
     {
         LINARG_CHECK(((density_ >= 0.0) && (density_ <= 100.0)), Invalid_density(density_))
 
-        fill_random(random, std::integral_constant<bool, false>{});
-    }
+        Array<std::size_t> locations = random_locations(base::size(), dens);
 
-
-    template<typename T>
-    void
-    Sparse_matrix<T>::fill_random(rd::Rd_ptr<T> random, std::false_type)
-    {
-        Array<std::size_t> locations = rd::random_locations(base::size(), density_);
+        random.apply_size(Matrix_size{req_rows, req_cols});
+        auto values = random.get();
 
         for(size_type i = 0; i < locations.size(); ++i)
         {
-            base::operator[](locations[i]) = random->get();
+            base::operator[](locations[i]) = values[i];
         }
     }
 

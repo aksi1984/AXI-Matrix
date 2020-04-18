@@ -9,13 +9,11 @@
 #include <regex>
 #include <list>
 
-struct Foo;
+using Cplx_d = std::complex<int>;
 
 int main()
 {
-    linarg::Vector<int> vector{1,2,3,4};
-
-    linarg::Triangular_matrix<int, linarg::Diagonal> M(vector);
+    linarg::Triangular_matrix<Cplx_d, linarg::Diagonal> M(4, linarg::Random<int>(1, 9));
     std::cout << M;
 
     return 0;

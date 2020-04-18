@@ -7,7 +7,7 @@
 
 #include "Conversions.hpp"
 #include "Exception.hpp"
-#include "Type_aliases.h"
+#include "Aliases.h"
 
 namespace linarg
 {

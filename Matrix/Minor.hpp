@@ -12,7 +12,7 @@ namespace linarg
                               typename M::allocator_type
                               >
     {
-        static_assert (traits::is_matrix<M>::value, "Invalid template parameter (must be Matrix).");
+        static_assert (is_matrix<M>::value, "Invalid template parameter (must be a Matrix).");
 
     public:
 

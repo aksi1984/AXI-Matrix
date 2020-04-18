@@ -5,6 +5,7 @@
 
 #include "Traits.hpp"
 #include "Enums.hpp"
+#include "Cond.hpp"
 
 namespace linarg
 {
@@ -41,7 +42,7 @@ namespace linarg
                 }
             }
 
-            if constexpr(traits::is_matrix<O>{})
+            if constexpr(is_matrix<O>{})
             {
                 return count == obj.rows() * obj.cols();
             }
@@ -186,7 +187,7 @@ namespace linarg
         }
 
         template<typename M>
-        typename std::enable_if<traits::is_complex<typename M::value_type>::value, bool>::type
+        typename std::enable_if<is_complex<typename M::value_type>::value, bool>::type
         is_diagonal(M mat)
         {
             bool diag_check = priv::is_diagonal_priv(mat, [](std::size_t i, std::size_t j){ return i != j; }, priv::Diag_check_type::All);
@@ -195,7 +196,7 @@ namespace linarg
         }
 
         template<typename M>
-        typename std::enable_if<!traits::is_complex<typename M::value_type>::value, bool>::type
+        typename std::enable_if<!is_complex<typename M::value_type>::value, bool>::type
         is_unit(M mat)
         {
             if(!mat.is_square())
