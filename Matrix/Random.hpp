@@ -4,6 +4,7 @@
 #include <random>
 #include <chrono>
 #include <variant>
+#include <algorithm>
 
 #include "Arrays.hpp"
 #include "Matrix_size.hpp"
@@ -116,19 +117,18 @@ namespace linarg
 
         Array<std::size_t> random_locations(const Matrix_size& size, double density)
         {
-            double n = static_cast<double>(size.rows_ * size.cols_);
-            std::size_t elems = static_cast<std::size_t>((density / 100.0) * n);
+            //double n = static_cast<double>(size.rows_ * size.cols_);
+            std::size_t elems = static_cast<std::size_t>((density / 100.0) * static_cast<double>(size.total()));
 
             auto seed = std::chrono::_V2::system_clock::now().time_since_epoch().count();
             std::default_random_engine engine(seed);
-            std::uniform_int_distribution<std::size_t> dist(0, size.rows_ * size.cols_);
+
+            Array<std::size_t> indexes(size.total() - 1);
+            std::iota(indexes.begin(), indexes.end(), 0);
+            std::shuffle(indexes.begin(), indexes.end(), engine);
 
             Array<std::size_t> locations(elems);
-
-            for(std::size_t i = 0; i < locations.size(); ++i)
-            {
-                locations[i] = dist(engine);
-            }
+            std::copy_n(indexes.begin(), elems, locations.begin());
 
             return locations;
         }
