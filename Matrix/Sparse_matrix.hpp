@@ -30,11 +30,11 @@ namespace linarg
 
         explicit Sparse_matrix(const Matrix_size& size, const allocator_type& alloc = allocator_type());
 
-        explicit Sparse_matrix(size_type req_rows, size_type req_cols, double dens, Random<T> random, const allocator_type& alloc = allocator_type());
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
+        explicit Sparse_matrix(size_type req_rows, size_type req_cols, double dens, Random<U> random, const allocator_type& alloc = allocator_type());
 
     private:
 
-        double density_;
         size_type zeros_;
         size_type non_zeros_;
     };
