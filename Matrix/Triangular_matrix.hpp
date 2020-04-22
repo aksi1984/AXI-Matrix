@@ -30,26 +30,32 @@ namespace linarg
         using size_type            = typename base::size_type;
         using allocator_type       = typename base::allocator_type;
 
-        explicit Triangular_matrix(const allocator_type& alloc = allocator_type());
+        explicit Triangular_matrix(const allocator_type& alloc = allocator_type{});
 
-        explicit Triangular_matrix(size_type size, const allocator_type& alloc = allocator_type());
+        explicit Triangular_matrix(size_type size, value_type value, const allocator_type& alloc = allocator_type{});
 
-        explicit Triangular_matrix(const Square_size& size, const allocator_type& alloc = allocator_type());
+        explicit Triangular_matrix(const Square_size& size, value_type value, const allocator_type& alloc = allocator_type{});
 
-        template<typename U>
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         explicit Triangular_matrix(size_type size, Random<U> random, const allocator_type& alloc = allocator_type());
 
-        explicit Triangular_matrix(size_type size, std::function<T> func, const allocator_type& alloc = allocator_type());
+        template<typename Function>
+        explicit Triangular_matrix(size_type size, Function function, const allocator_type& alloc = allocator_type{});
 
-        explicit Triangular_matrix(const Vector<T>& vector, const allocator_type& alloc = allocator_type());
+        explicit Triangular_matrix(const std::vector<T>& vector, const allocator_type& alloc = allocator_type{});
 
-        Triangular_matrix(const Triangular_matrix& copy);
+        explicit Triangular_matrix(const Vector<T>& vector, const allocator_type& alloc = allocator_type{});
 
-        Triangular_matrix(Triangular_matrix&& move);
+        explicit Triangular_matrix(const Triangular_matrix& copy);
+
+        explicit Triangular_matrix(Triangular_matrix&& move);
 
         Triangular_matrix& operator=(const Triangular_matrix& rhs);
 
         Triangular_matrix& operator=(Triangular_matrix&& rhs);
+
+        template<typename U>
+        Triangular_matrix& operator=(Random<U> random);
 
         virtual reference operator()(size_type i, size_type j) override;
 
