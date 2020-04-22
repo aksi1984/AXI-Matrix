@@ -5,6 +5,7 @@
 #include <chrono>
 #include <variant>
 #include <algorithm>
+#include <complex>
 
 #include "Arrays.hpp"
 #include "Matrix_size.hpp"
@@ -82,6 +83,8 @@ namespace linarg
             min_{min},
             max_{max} { }
 
+
+
         template<typename U>
         void apply_size(U u)
         {
@@ -93,18 +96,40 @@ namespace linarg
             return size_;
         }
 
-        Array<T> get()
+        Array<T> get(std::true_type)
         {
             auto size = std::visit(Size_visitor{}, size_);
-            Array<T> numbers(size);
+            Array<T> values(size);
 
             using dist_type = std::conditional_t<std::is_integral_v<T>, std::uniform_int_distribution<T>, std::uniform_real_distribution<T>>;
 
             Random_impl<dist_type> random{min_, max_};
 
-            for(auto& x : numbers) x = random.get();
+            for(auto& x : values) x = random.get();
 
-            return numbers;
+            return values;
+        }
+
+        Array<std::complex<T>> get(std::false_type)
+        {
+            auto size = std::visit(Size_visitor{}, size_);
+            Array<std::complex<T>> values(size);
+
+            using dist_type = std::conditional_t<std::is_integral_v<T>, std::uniform_int_distribution<T>, std::uniform_real_distribution<T>>;
+
+            Random_impl<dist_type> random{min_, max_};
+
+            std::size_t count = 0;
+
+            for(auto& x : values)
+            {
+                std::complex<T> cplx;
+                cplx.real(random.get());
+                cplx.imag(random.get());
+                values[count++] = cplx;
+            }
+
+            return values;
         }
 
     private:
@@ -117,7 +142,6 @@ namespace linarg
 
         Array<std::size_t> random_locations(const Matrix_size& size, double density)
         {
-            //double n = static_cast<double>(size.rows_ * size.cols_);
             std::size_t elems = static_cast<std::size_t>((density / 100.0) * static_cast<double>(size.total()));
 
             auto seed = std::chrono::_V2::system_clock::now().time_since_epoch().count();
@@ -132,7 +156,6 @@ namespace linarg
 
             return locations;
         }
-
 
 
 } // namespace Axi
