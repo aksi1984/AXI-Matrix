@@ -7,13 +7,14 @@
 namespace linarg
 {
 
+
     template<std::size_t N, typename... Ts>
     using selected_type = typename std::tuple_element<N, std::tuple<Ts...>>::type;
 
     template<std::size_t N, typename T>
     struct Predicate
     {
-        using type = selected_type<N, std::less<T>, std::greater<T>, std::not_equal_to<T>>;
+        using type = selected_type<N, std::less<std::size_t>, std::greater<std::size_t>, std::not_equal_to<std::size_t>>;
     };
 
     template<std::size_t N>
@@ -37,49 +38,78 @@ namespace linarg
         return cplx_array;
     }
 
+    template<typename M, typename Container>
+    void fill(M& matrix, Container container)
+    {
+        auto container_iterator = container.begin();
+
+        for(auto diag_iter = matrix.begin_diag(); diag_iter != matrix.end_diag(); ++diag_iter, ++container_iterator)
+        {
+            *diag_iter = *container_iterator;
+        }
+    }
+
     template<std::size_t N>
     struct Triangular_data
     {
         template<typename MS, typename T>
-        static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, T data, std::false_type)
+        static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, Random<T> random)
         {
-            using matrix_value_type = typename MS::value_type;
-            typename Predicate<N, matrix_value_type>::type pred;
-            using data_type = typename std::conditional<std::is_arithmetic<T>::value, traits::Arithmetic_value<T>, traits::Non_arithmetic_value<T>>::type;
+            using value_type = typename MS::value_type;
+            typename Predicate<N, value_type>::type pred;
             using size_type = typename MS::size_type;
             std::size_t non_zeros_size = calc_non_zero<N>(rows);
-            data.apply_size(non_zeros_size);
+            random.apply_size(non_zeros_size);
 
-            Array<matrix_value_type> rd_array = data.get();
+            Array<value_type> values = random.get(std::is_arithmetic<value_type>{});
 
             for(size_type i = 0, k = 0; i < rows; ++i)
             {
                 for(size_type j = 0; j < cols; ++j)
                 {
-                    matrix_value_type value = pred(i, j) ? static_cast<matrix_value_type>(0) : rd_array[k++];
+                    value_type value = pred(i, j) ? value_type{} : values[k++];
                     matrix_storage[rows * j + i] = value;
                 }
             }
         }
 
-        template<typename MS, typename T>
-        static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, T data, std::true_type)
+        template<typename MS>
+        static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, typename MS::value_type data, std::true_type)
         {
             using matrix_value_type = typename MS::value_type;
             using size_type = typename MS::size_type;
 
-            typename Predicate<2, matrix_value_type>::type pred;
+            typename Predicate<N, matrix_value_type>::type pred;
 
             for(size_type i = 0; i < rows; ++i)
             {
                 for(size_type j = 0; j < cols; ++j)
                 {
-                    matrix_value_type value = pred(i, j) ? static_cast<matrix_value_type>(0) : data[i];
+                    matrix_value_type value = pred(i, j) ? matrix_value_type{} : matrix_value_type{data};
+                    matrix_storage[rows * j + i] = value;
+                }
+            }
+        }
+
+        template<typename MS, typename Function>
+        static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, Function function, std::false_type)
+        {
+            using value_type = typename MS::value_type;
+            using size_type = typename MS::size_type;
+
+            typename Predicate<N, value_type>::type pred;
+
+            for(size_type i = 0; i < rows; ++i)
+            {
+                for(size_type j = 0; j < cols; ++j)
+                {
+                    value_type value = pred(i, j) ? value_type{} : function();
                     matrix_storage[rows * j + i] = value;
                 }
             }
         }
     };
+
 
     //
 
