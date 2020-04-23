@@ -237,11 +237,12 @@ namespace linarg
         template<typename M>
         std::size_t zeros(M mat)
         {
+            using value_type = typename M::value_type;
             std::size_t count = 0;
 
             for(auto x : mat)
             {
-                if(x == 0)
+                if(x == value_type{})
                 {
                     count++;
                 }

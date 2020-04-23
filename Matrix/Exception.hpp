@@ -92,6 +92,12 @@ namespace linarg
                                               std::to_string(j) + ") " + m) { }
     };
 
+    struct Bad_constructor : public Exception_base<std::logic_error>
+    {
+        Bad_constructor() :
+            Exception_base<std::logic_error>("Bad constructor") { }
+    };
+
 } // namespace linarg
 
 #endif // EXCEPTION_HPP

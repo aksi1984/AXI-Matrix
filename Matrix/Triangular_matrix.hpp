@@ -2,9 +2,9 @@
 #define DIAGONAL_MATRIX_HPP
 
 #include "Base.hpp"
-#include "Triangular_data.hpp"
+#include "Triangular_fill.hpp"
 
-namespace linarg
+namespace linalg
 {
 
     template<typename T, typename Tr>
@@ -39,12 +39,12 @@ namespace linarg
         template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         explicit Triangular_matrix(size_type size, Random<U> random, const allocator_type& alloc = allocator_type());
 
-        template<typename Function>
+        template<typename Function, typename = std::enable_if_t<is_functor<Function>::value>>
         explicit Triangular_matrix(size_type size, Function function, const allocator_type& alloc = allocator_type{});
 
-        explicit Triangular_matrix(const std::vector<T>& vector, const allocator_type& alloc = allocator_type{});
+        explicit Triangular_matrix(const std::vector<value_type>& vector, const allocator_type& alloc = allocator_type{});
 
-        explicit Triangular_matrix(const Vector<T>& vector, const allocator_type& alloc = allocator_type{});
+        explicit Triangular_matrix(const Vector<value_type>& vector, const allocator_type& alloc = allocator_type{});
 
         explicit Triangular_matrix(const Triangular_matrix& copy);
 
@@ -54,14 +54,22 @@ namespace linarg
 
         Triangular_matrix& operator=(Triangular_matrix&& rhs);
 
-        template<typename U>
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         Triangular_matrix& operator=(Random<U> random);
+
+        Triangular_matrix& operator=(const std::vector<value_type>& rhs);
+
+        Triangular_matrix& operator=(const Vector<value_type>& rhs);
 
         virtual reference operator()(size_type i, size_type j) override;
 
         virtual const_reference operator()(size_type i, size_type j) const override;
 
         virtual reference at(size_type i, size_type j) override;
+
+    private:
+        template<typename Container>
+        void resize(Container container);
     };
 
 } // namespace linarg

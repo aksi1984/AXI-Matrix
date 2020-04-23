@@ -6,48 +6,51 @@
 
 namespace linarg
 {
-
-
-    template<std::size_t N, typename... Ts>
-    using selected_type = typename std::tuple_element<N, std::tuple<Ts...>>::type;
-
-    template<std::size_t N, typename T>
-    struct Predicate
+    namespace detail
     {
-        using type = selected_type<N, std::less<std::size_t>, std::greater<std::size_t>, std::not_equal_to<std::size_t>>;
-    };
+        template<std::size_t N, typename... Ts>
+        using selected_type = typename std::tuple_element<N, std::tuple<Ts...>>::type;
 
-    template<std::size_t N>
-    std::size_t calc_non_zero(std::size_t size)
-    {
-        return ( N != 2 ? ((1 + size) * size) / 2 : size );
-    }
-
-    template<typename T>
-    Array<std::complex<T>> fill_with_cplx(std::size_t size, Random<T> random)
-    {
-        Array<std::complex<T>> cplx_array(size);
-
-        for(std::size_t i = 0; i < cplx_array.size(); ++i)
+        template<std::size_t N, typename T>
+        struct Predicate
         {
-            std::complex<T> cplx;
-            cplx.real(random.get());
-            cplx.imag(random.get());
+            using type = selected_type<N, std::less<std::size_t>, std::greater<std::size_t>, std::not_equal_to<std::size_t>>;
+        };
+
+        template<std::size_t N>
+        std::size_t calc_non_zero(std::size_t size)
+        {
+            return ( N != 2 ? ((1 + size) * size) / 2 : size );
         }
 
-        return cplx_array;
-    }
-
-    template<typename M, typename Container>
-    void fill(M& matrix, Container container)
-    {
-        auto container_iterator = container.begin();
-
-        for(auto diag_iter = matrix.begin_diag(); diag_iter != matrix.end_diag(); ++diag_iter, ++container_iterator)
+        template<typename T>
+        Array<std::complex<T>> fill_with_cplx(std::size_t size, Random<T> random)
         {
-            *diag_iter = *container_iterator;
+            Array<std::complex<T>> cplx_array(size);
+
+            for(std::size_t i = 0; i < cplx_array.size(); ++i)
+            {
+                std::complex<T> cplx;
+                cplx.real(random.get());
+                cplx.imag(random.get());
+            }
+
+            return cplx_array;
         }
-    }
+
+        template<typename M, typename Container>
+        void fill(M& matrix, Container container)
+        {
+            auto container_iterator = container.begin();
+
+            for(auto diag_iter = matrix.begin_diag(); diag_iter != matrix.end_diag(); ++diag_iter, ++container_iterator)
+            {
+                *diag_iter = *container_iterator;
+            }
+        }
+
+    } // namespace detail
+
 
     template<std::size_t N>
     struct Triangular_data
@@ -56,9 +59,9 @@ namespace linarg
         static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, Random<T> random)
         {
             using value_type = typename MS::value_type;
-            typename Predicate<N, value_type>::type pred;
+            typename detail::Predicate<N, value_type>::type pred;
             using size_type = typename MS::size_type;
-            std::size_t non_zeros_size = calc_non_zero<N>(rows);
+            std::size_t non_zeros_size = detail::calc_non_zero<N>(rows);
             random.apply_size(non_zeros_size);
 
             Array<value_type> values = random.get(std::is_arithmetic<value_type>{});
@@ -79,7 +82,7 @@ namespace linarg
             using matrix_value_type = typename MS::value_type;
             using size_type = typename MS::size_type;
 
-            typename Predicate<N, matrix_value_type>::type pred;
+            typename detail::Predicate<N, matrix_value_type>::type pred;
 
             for(size_type i = 0; i < rows; ++i)
             {
@@ -97,7 +100,7 @@ namespace linarg
             using value_type = typename MS::value_type;
             using size_type = typename MS::size_type;
 
-            typename Predicate<N, value_type>::type pred;
+            typename detail::Predicate<N, value_type>::type pred;
 
             for(size_type i = 0; i < rows; ++i)
             {

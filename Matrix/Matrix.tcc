@@ -16,9 +16,17 @@ namespace linarg
         base(mat_size, alloc) { }
 
     template<typename T>
-        template<typename U>
+        template<typename U, typename>
         Matrix<T>::Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc) :
-            base(req_rows, req_cols, random, alloc) { }
+            base(req_rows, req_cols, alloc)
+        {
+            random.apply_size(Matrix_size{req_rows, req_cols});
+            Array<T> values = random.get(std::is_arithmetic<T>{});
+
+            size_type count = 0;
+
+            for(auto& x : *this) x = values[count++];
+        }
 
     template<typename T>
     Matrix<T>::Matrix(List<value_type> list, const allocator_type& alloc) :

@@ -39,7 +39,7 @@ namespace linarg
         template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         explicit Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc = allocator_type());
 
-        explicit Matrix(List<value_type> list, const allocator_type& alloc = allocator_type());
+        Matrix(List<value_type> list, const allocator_type& alloc = allocator_type());
 
         explicit Matrix(List_of_lists<value_type> list, const allocator_type& alloc = allocator_type());
 
@@ -51,7 +51,7 @@ namespace linarg
 
         explicit Matrix(const Vector<T>& vector, const allocator_type& alloc = allocator_type{});
 
-        explicit Matrix(const std::vector<T>& vector, const allocator_type& alloc = allocator_type{});
+        Matrix(const std::vector<T>& vector, const allocator_type& alloc = allocator_type{});
 
         Matrix(const Matrix& copy);
 

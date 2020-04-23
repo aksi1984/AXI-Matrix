@@ -9,7 +9,7 @@ namespace linarg
     template<typename T>
     class Sparse_matrix : public Unbounded_matrix<Sparse_tag, T>
     {
-        static_assert (std::is_arithmetic<T>::value, "Uncorrect type");
+        static_assert (std::is_arithmetic<T>::value || is_complex<T>::value, "Uncorrect type");
 
     public:
 
