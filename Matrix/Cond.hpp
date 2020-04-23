@@ -6,7 +6,7 @@
 
 #include "Aliases.h"
 
-namespace linarg
+namespace linalg
 {
     template<typename T, typename C>
     struct is_initializer_list : std::false_type
@@ -54,9 +54,19 @@ namespace linarg
                                                                decltype(std::declval<T>().cols())
                                                              >, void >> : public std::true_type { };
 
+    ////////////////////////////////////////////////////////
 
+    template<typename T>
+    struct is_functor
+    {
+        typedef char true_t[1];
+        typedef char false_t[2];
 
+        template<typename U> static true_t& check(decltype(&U::operator()));
+        template<typename U> static false_t& check(...);
 
+        static constexpr bool value = ( sizeof(check<T>(0)) == sizeof(true_t) );
+    };
 
 } // namespace linarg
 
