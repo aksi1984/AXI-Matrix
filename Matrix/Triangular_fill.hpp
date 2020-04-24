@@ -1,10 +1,10 @@
-#ifndef TRIANGULAR_PARAM_HPP
-#define TRIANGULAR_PARAM_HPP
+#ifndef TRIANGULAR_FILL_HPP
+#define TRIANGULAR_FILL_HPP
 
 #include <complex>
 #include "Traits.hpp"
 
-namespace linarg
+namespace linalg
 {
     namespace detail
     {
@@ -12,7 +12,7 @@ namespace linarg
         using selected_type = typename std::tuple_element<N, std::tuple<Ts...>>::type;
 
         template<std::size_t N, typename T>
-        struct Predicate
+        struct Compare
         {
             using type = selected_type<N, std::less<std::size_t>, std::greater<std::size_t>, std::not_equal_to<std::size_t>>;
         };
@@ -53,13 +53,15 @@ namespace linarg
 
 
     template<std::size_t N>
-    struct Triangular_data
+    struct Triangular_fill
     {
+        static constexpr std::size_t compare_number = N;
+
         template<typename MS, typename T>
         static void fill(std::size_t rows, std::size_t cols, MS& matrix_storage, Random<T> random)
         {
             using value_type = typename MS::value_type;
-            typename detail::Predicate<N, value_type>::type pred;
+            typename detail::Compare<N, value_type>::type pred;
             using size_type = typename MS::size_type;
             std::size_t non_zeros_size = detail::calc_non_zero<N>(rows);
             random.apply_size(non_zeros_size);
@@ -82,7 +84,7 @@ namespace linarg
             using matrix_value_type = typename MS::value_type;
             using size_type = typename MS::size_type;
 
-            typename detail::Predicate<N, matrix_value_type>::type pred;
+            typename detail::Compare<N, matrix_value_type>::type pred;
 
             for(size_type i = 0; i < rows; ++i)
             {
@@ -100,7 +102,7 @@ namespace linarg
             using value_type = typename MS::value_type;
             using size_type = typename MS::size_type;
 
-            typename detail::Predicate<N, value_type>::type pred;
+            typename detail::Compare<N, value_type>::type pred;
 
             for(size_type i = 0; i < rows; ++i)
             {
@@ -113,13 +115,12 @@ namespace linarg
         }
     };
 
-
     //
 
-    using Lower    = Triangular_data<0>;
-    using Upper    = Triangular_data<1>;
-    using Diagonal = Triangular_data<2>;
+    using Lower    = Triangular_fill<0>;
+    using Upper    = Triangular_fill<1>;
+    using Diagonal = Triangular_fill<2>;
 
 }
 
-#endif // TRIANGULAR_PARAM_HPP
+#endif // TRIANGULAR_FILL_HPP
