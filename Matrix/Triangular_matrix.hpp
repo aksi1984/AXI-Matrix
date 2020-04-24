@@ -70,6 +70,8 @@ namespace linalg
     private:
         template<typename Container>
         void resize(Container container);
+
+        bool initialized_;
     };
 
 } // namespace linarg
