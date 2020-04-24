@@ -9,7 +9,7 @@
 #include "Unbounded_matrix.tcc"
 
 
-namespace linarg
+namespace linalg
 {
     template<typename T>
     class Matrix : public Unbounded_matrix<Dense_tag, T>
@@ -39,15 +39,20 @@ namespace linarg
         template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         explicit Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc = allocator_type());
 
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
+        explicit Matrix(const Matrix_size& size, Random<U> random, const allocator_type& alloc = allocator_type{});
+
         Matrix(List<value_type> list, const allocator_type& alloc = allocator_type());
 
-        explicit Matrix(List_of_lists<value_type> list, const allocator_type& alloc = allocator_type());
+        Matrix(List_of_lists<value_type> list, const allocator_type& alloc = allocator_type());
 
         explicit Matrix(const std::string& expr, const allocator_type& alloc = allocator_type());
 
-        Matrix(size_type rows, size_type cols, std::function<T()> function);
+        template<typename Function, typename = std::enable_if_t<is_functor<Function>::value>>
+        explicit Matrix(const Matrix_size& size, Function function, const allocator_type& alloc = allocator_type());
 
-        explicit Matrix(const Matrix_size& size, std::function<T()> function, const allocator_type& alloc = allocator_type());
+        template<typename Function, typename = std::enable_if_t<is_functor<Function>::value>>
+        explicit Matrix(size_type rows, size_type cols, Function function, const allocator_type& alloc = allocator_type{});
 
         explicit Matrix(const Vector<T>& vector, const allocator_type& alloc = allocator_type{});
 
@@ -74,6 +79,9 @@ namespace linarg
 
         template<typename U>
         Matrix& operator=(Matrix<U>&& rhs) = delete;
+
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
+        Matrix& operator=(Random<U> random);
 
         Matrix& operator=(List<value_type> list);
 
