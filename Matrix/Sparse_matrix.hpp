@@ -4,7 +4,7 @@
 #include "Unbounded_matrix.hpp"
 #include "Random.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T>
     class Sparse_matrix : public Unbounded_matrix<Sparse_tag, T>
@@ -31,7 +31,21 @@ namespace linarg
         explicit Sparse_matrix(const Matrix_size& size, const allocator_type& alloc = allocator_type());
 
         template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
-        explicit Sparse_matrix(size_type req_rows, size_type req_cols, double dens, Random<U> random, const allocator_type& alloc = allocator_type());
+        explicit Sparse_matrix(size_type req_rows, size_type req_cols, double density, Random<U> random, const allocator_type& alloc = allocator_type());
+
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
+        explicit Sparse_matrix(const Matrix_size& req_size, double density, Random<U> random, const allocator_type& alloc = allocator_type());
+
+        Sparse_matrix(const Sparse_matrix& copy);
+
+        Sparse_matrix(Sparse_matrix&& move);
+
+        Sparse_matrix& operator=(const Sparse_matrix& rhs);
+
+        Sparse_matrix& operator=(Sparse_matrix&& rhs);
+
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
+        Sparse_matrix& operator=(Random<U> rhs);
 
     private:
 
