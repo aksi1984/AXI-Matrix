@@ -56,7 +56,7 @@ namespace linalg
 
             void add_seed()
             {
-                typename std::mt19937::result_type seed = std::chrono::_V2::system_clock::now().time_since_epoch().count();
+                auto seed = std::chrono::_V2::system_clock::now().time_since_epoch().count();
                 engine_.seed(seed);
             }
 
@@ -80,6 +80,17 @@ namespace linalg
             std::copy_n(indexes.begin(), elems, locations.begin());
 
             return locations;
+        }
+
+        double random_density()
+        {
+            auto seed = std::chrono::_V2::system_clock::now().time_since_epoch().count();
+            std::default_random_engine engine(seed);
+
+            using param_type = std::uniform_real_distribution<double>::param_type;
+            param_type params{10.0, 40.0};
+
+            return std::uniform_real_distribution<double>{params}(engine);
         }
 
     } // namespace detail
@@ -106,7 +117,8 @@ namespace linalg
                 min_{min},
                 max_{max} { }
 
-
+            Random(std::size_t req_rows, std::size_t req_cols, T min, T max) :
+                Random{Matrix_size{req_rows, req_cols}, min, max} { }
 
             template<typename U>
             void apply_size(U u)
