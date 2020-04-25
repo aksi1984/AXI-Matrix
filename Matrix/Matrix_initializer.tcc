@@ -3,7 +3,7 @@
 
 #include "Matrix_initializer.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T, typename C>
     Matrix_initializer<T, C>::Matrix_initializer(C container)

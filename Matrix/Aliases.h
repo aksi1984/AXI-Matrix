@@ -7,7 +7,7 @@
 //#include "Vector.hpp"
 #include "Random.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T>
     using List              = std::initializer_list<T>;

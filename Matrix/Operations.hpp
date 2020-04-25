@@ -8,7 +8,7 @@
 #include <iostream>
 #include <functional>
 
-namespace linarg
+namespace linalg
 {
     namespace op
     {

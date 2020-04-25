@@ -4,7 +4,7 @@
 #include "Vector.hpp"
 #include "Expression.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T, typename C>
     Vector<T, C>::Vector(const allocator_type& alloc) :

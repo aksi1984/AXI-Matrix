@@ -4,7 +4,7 @@
 #include "Base.tcc"
 #include "Minor_initializer.tcc"
 
-namespace linarg
+namespace linalg
 {
     template<typename M>
     class Minor : public Base<Minor_tag,

@@ -3,7 +3,7 @@
 
 #include <memory>
 
-namespace linarg
+namespace linalg
 {
     template<typename T, typename Alloc = std::allocator<T>>
     class Array

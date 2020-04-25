@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-namespace linarg
+namespace linalg
 {
     #define LINARG_CHECK(expr, e)  \
             if( !(expr) )          \
@@ -89,7 +89,7 @@ namespace linarg
     {
         Bad_index(std::size_t i, std::size_t j, const std::string& m) :
             Exception_base<std::logic_error>("Bad index (" + std::to_string(i) + ", " +
-                                              std::to_string(j) + ") " + m) { }
+                                              std::to_string(j) + "). " + m) { }
     };
 
     struct Bad_constructor : public Exception_base<std::logic_error>

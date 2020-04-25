@@ -8,7 +8,7 @@
 #include "Container.hpp"
 #include "Aliases.h"
 
-namespace linarg
+namespace linalg
 {
     namespace traits
     {

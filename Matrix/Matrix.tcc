@@ -5,7 +5,7 @@
 #include "Container.hpp"
 #include "Matrix_initializer.tcc"
 
-namespace linarg
+namespace linalg
 {
     template<typename T>
     Matrix<T>::Matrix(size_type reqRows, size_type reqCols, const allocator_type& alloc) :
@@ -27,6 +27,11 @@ namespace linarg
 
             for(auto& x : *this) x = values[count++];
         }
+
+    template<typename T>
+        template<typename U, typename>
+        Matrix<T>::Matrix(const Matrix_size& size, Random<U> random, const allocator_type& alloc) :
+            Matrix{size.rows_, size.cols_, random, alloc} { }
 
     template<typename T>
     Matrix<T>::Matrix(List<value_type> list, const allocator_type& alloc) :
@@ -54,11 +59,17 @@ namespace linarg
     }
 
     template<typename T>
-    Matrix<T>::Matrix(const Matrix_size& size, std::function<T()> function, const allocator_type& alloc) :
-        base(size.rows_, size.cols_, alloc)
-    {
-        fill_from_function(function);
-    }
+        template<typename Function, typename>
+        Matrix<T>::Matrix(const Matrix_size& size, Function function, const allocator_type& alloc) :
+            base(size.rows_, size.cols_, alloc)
+        {
+            fill_from_function(function);
+        }
+
+    template<typename T>
+        template<typename Function, typename>
+        Matrix<T>::Matrix(size_type req_rows, size_type req_cols, Function function, const allocator_type& alloc) :
+            Matrix{Matrix_size{req_rows, req_cols}, function, alloc} { }
 
     template<typename T>
     Matrix<T>::Matrix(const Vector<T>& vector, const allocator_type& alloc) :
@@ -99,6 +110,27 @@ namespace linarg
 
         return *this;
     }
+
+    template<typename T>
+        template<typename U, typename>
+        Matrix<T>&
+        Matrix<T>::operator=(Random<U> random)
+        {
+            LINARG_CHECK(std::holds_alternative<Matrix_size>(random.size()), Bad_constructor{})
+
+            if(Matrix_size new_size = std::get<0>(random.size()); new_size.total() != base::size().total())
+            {
+                Matrix temp{new_size};
+                *this = temp;
+            }
+
+            Array<T> values = random.get(std::is_arithmetic<T>{});
+            size_type count = 0;
+
+            for(auto& x : *this) x = values[count++];
+
+            return *this;
+        }
 
     template<typename T>
     Matrix<T>&

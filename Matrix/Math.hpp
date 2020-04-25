@@ -5,7 +5,7 @@
 #include "Enums.hpp"
 
 
-namespace linarg
+namespace linalg
 {
     namespace math
     {

@@ -7,7 +7,7 @@
 #include "Enums.hpp"
 #include "Cond.hpp"
 
-namespace linarg
+namespace linalg
 {
     namespace algo
     {

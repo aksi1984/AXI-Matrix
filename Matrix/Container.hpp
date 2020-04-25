@@ -7,7 +7,7 @@
 
 #include "Iterator.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T, typename Alloc = std::allocator<T>>
     class Container

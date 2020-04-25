@@ -3,7 +3,7 @@
 
 #include "Vector.hpp"
 
-namespace linarg
+namespace linalg
 {
     struct Upper_triangle { };
     struct Lower_triangle { };

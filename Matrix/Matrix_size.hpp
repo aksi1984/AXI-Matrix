@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace linarg
+namespace linalg
 {
     /*!
      * \brief The Matrix_size struct

@@ -10,7 +10,7 @@
 #include "Algorithms.hpp"
 #include "Cond.hpp"
 
-namespace linarg
+namespace linalg
 {
     struct Dense_tag { };
     struct Sparse_tag { };

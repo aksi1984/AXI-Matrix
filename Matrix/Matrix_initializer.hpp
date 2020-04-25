@@ -13,7 +13,7 @@
 #include "Exception.hpp"
 
 
-namespace linarg
+namespace linalg
 {
 
     template<typename T, typename C>

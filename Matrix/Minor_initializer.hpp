@@ -3,7 +3,7 @@
 
 #include "Math.hpp"
 
-namespace linarg
+namespace linalg
 {
     class Minor_initializer
     {

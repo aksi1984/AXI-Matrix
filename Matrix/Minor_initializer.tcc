@@ -3,7 +3,7 @@
 
 #include "Minor_initializer.hpp"
 
-namespace linarg
+namespace linalg
 {
     Minor_initializer::Minor_initializer(Matrix_size size, Dimension dim) :
         dim_(dim)

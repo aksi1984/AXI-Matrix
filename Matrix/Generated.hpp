@@ -4,7 +4,7 @@
 #include "Vector.hpp"
 #include "Matrix.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T>
     Matrix<T> make_diagonal(const Vector<T>& vec)

@@ -3,7 +3,7 @@
 
 #include "Matrix_size.hpp"
 
-namespace linarg
+namespace linalg
 {
     Matrix_size::Matrix_size() :
         rows_{},

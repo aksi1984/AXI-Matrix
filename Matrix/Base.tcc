@@ -4,7 +4,7 @@
 #include "Base.hpp"
 #include "Arrays.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename Type, typename T, typename A, typename Alloc>
     Base<Type, T, A, Alloc>&
@@ -66,7 +66,7 @@ namespace linarg
     template<typename Type, typename T, typename A, typename Alloc>
     typename Base<Type, T, A, Alloc>::reference
     Base<Type, T, A, Alloc>::operator()(size_type i, size_type j)
-    {std::cout << "TTT";
+    {
         LINARG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("operator()") )
 
         return data_[size_.rows_ * j + i];

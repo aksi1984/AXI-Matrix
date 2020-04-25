@@ -3,7 +3,7 @@
 
 #include "Base.hpp"
 #include "Vector.hpp"
-#include "Triangular_data.hpp"
+#include "Triangular_fill.hpp"
 #include "Algorithms.hpp"
 
 #include <iostream>
@@ -11,7 +11,7 @@
 #include <iomanip>
 #include <locale>
 
-namespace linarg
+namespace linalg
 {
     template<typename Char, typename Traits, typename M>
     std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const M& mat)

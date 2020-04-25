@@ -3,7 +3,7 @@
 
 #include "Expression.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename T>
     Expression<T>::Expression(const std::string& expr) :

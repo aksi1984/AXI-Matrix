@@ -4,7 +4,7 @@
 #include "Unbounded_matrix.hpp"
 
 
-namespace linarg
+namespace linalg
 {
     template<typename Type, typename T>
     Unbounded_matrix<Type, T>::Unbounded_matrix(const allocator_type& alloc) :

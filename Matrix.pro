@@ -40,7 +40,7 @@ HEADERS += \
     Matrix/Sparse_matrix.hpp \
     Matrix/Sparse_matrix.tcc \
     Matrix/Traits.hpp \
-    Matrix/Triangular_data.hpp \
+    Matrix/Triangular_fill.hpp \
     Matrix/Triangular_matrix.hpp \
     Matrix/Triangular_matrix.tcc \
     Matrix/Trivec.hpp \

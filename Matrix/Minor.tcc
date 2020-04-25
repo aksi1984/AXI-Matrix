@@ -3,7 +3,7 @@
 
 #include "Minor.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename M>
     Minor<M>::Minor(M mat, size_type n, const Minor_initializer& minor_init, const allocator_type& alloc) :

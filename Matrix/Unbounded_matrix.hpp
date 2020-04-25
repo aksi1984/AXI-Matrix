@@ -8,7 +8,7 @@
 #include "Random.hpp"
 #include "Operations.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename Type, typename T>
     class Unbounded_matrix : public Base<Type, T, Unbounded_array<T>>

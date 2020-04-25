@@ -9,7 +9,7 @@
 #include "Exception.hpp"
 #include "Aliases.h"
 
-namespace linarg
+namespace linalg
 {
 
     template<std::size_t N, typename... Ts>

@@ -3,7 +3,7 @@
 
 #include "Arrays.hpp"
 
-namespace linarg
+namespace linalg
 {
     template<typename M>
     class Diagonal_elems : public Array<typename M::value_type>

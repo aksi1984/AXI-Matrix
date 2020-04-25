@@ -12,7 +12,7 @@
 #include "Iterator.hpp"
 #include "Base.hpp"
 
-namespace linarg
+namespace linalg
 {
 
     template<typename T, typename C = Unbounded_array<T>>
