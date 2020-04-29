@@ -1,0 +1,4 @@
+#ifndef TENSOR_BASE_TCC
+#define TENSOR_BASE_TCC
+
+#endif // TENSOR_BASE_TCC

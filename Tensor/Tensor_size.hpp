@@ -1,0 +1,4 @@
+#ifndef TENSOR_SIZE_HPP
+#define TENSOR_SIZE_HPP
+
+#endif // TENSOR_SIZE_HPP
