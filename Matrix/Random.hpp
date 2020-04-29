@@ -117,16 +117,18 @@ namespace linalg
                 min_{min},
                 max_{max} { }
 
-            Random(std::size_t req_rows, std::size_t req_cols, T min, T max) :
-                Random{Matrix_size{req_rows, req_cols}, min, max} { }
+            Random(const Square_matrix_size& req_size, T min, T max) :
+                size_{req_size},
+                min_{min},
+                max_{max} { }
 
             template<typename U>
-            void apply_size(U u)
+            void set_size(U u)
             {
                 size_ = u;
             }
 
-            std::variant<Matrix_size, std::size_t> size()
+            std::variant<Matrix_size, Square_matrix_size, std::size_t> size()
             {
                 return size_;
             }
@@ -169,11 +171,11 @@ namespace linalg
 
         private:
 
-            std::variant<Matrix_size, std::size_t> size_;
+            std::variant<Matrix_size, Square_matrix_size, std::size_t> size_;
             T min_;
             T max_;
-        };
 
+        };
 
 } // namespace Axi
 
