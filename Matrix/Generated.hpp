@@ -6,7 +6,7 @@
 
 namespace linalg
 {
-    template<typename T>
+    /*template<typename T>
     Matrix<T> make_diagonal(const Vector<T>& vec)
     {
         Matrix<T> mat(vec.size(), vec.size());
@@ -19,7 +19,7 @@ namespace linalg
         }
 
         return mat;
-    }
+    }*/
 
     template<typename T>
     Matrix<T> make_band(const Vector<T>& diag, const Vector<T>& upper, const Vector<T>& lower)
@@ -68,7 +68,7 @@ namespace linalg
         }
     }
 
-    template<typename R>
+    /*template<typename R>
     Matrix<typename R::result_type> make_triangle(R random, Triangle_type type)
     {
         LINARG_CHECK( (random.size().rows_ == random.size().cols_),
@@ -78,7 +78,7 @@ namespace linalg
         transform_to_triangle(mat, type);
 
         return mat;
-    }
+    }*/
 
     template<typename T>
     Matrix<T> make_symmetric(const Vector<T>& diag, const Vector<T>& triangle)
