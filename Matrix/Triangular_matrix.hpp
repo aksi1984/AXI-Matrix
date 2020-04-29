@@ -8,7 +8,7 @@ namespace linalg
 {
 
     template<typename T, typename Tr>
-    class Triangular_matrix : public Base<Triangular_tag, T, Array<T>>
+    class Triangular_matrix : public Base<tags::Triangular_matrix_tag, T, Array<T>>
     {
         static_assert (traits::is_one_of<Tr, Lower, Upper, Diagonal>(),
                        "Ivalid type of second parameter- must be one of: Lower, Upper or Diagonal.");
@@ -20,7 +20,7 @@ namespace linalg
     public:
 
         using triangular_fill_type = Tr;
-        using base                 = Base<Triangular_tag, T, Array<T>>;
+        using base                 = Base<tags::Triangular_matrix_tag, T, Array<T>>;
         using matrix_type          = typename base::matrix_type;
         using value_type           = typename base::value_type;
         using reference            = typename base::reference;
@@ -34,7 +34,10 @@ namespace linalg
 
         explicit Triangular_matrix(size_type size, value_type value, const allocator_type& alloc = allocator_type{});
 
-        explicit Triangular_matrix(const Square_size& size, value_type value, const allocator_type& alloc = allocator_type{});
+        explicit Triangular_matrix(const Square_matrix_size& size, value_type value, const allocator_type& alloc = allocator_type{});
+
+        template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
+        explicit Triangular_matrix(const Square_matrix_size& req_size, Random<U> random, const allocator_type& alloc = allocator_type{});
 
         template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         explicit Triangular_matrix(size_type size, Random<U> random, const allocator_type& alloc = allocator_type());
