@@ -5,7 +5,7 @@
 
 namespace linalg
 {
-    #define LINARG_CHECK(expr, e)  \
+    #define LINALG_CHECK(expr, e)  \
             if( !(expr) )          \
             {                      \
                 e.throw_except();  \
