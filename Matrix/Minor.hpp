@@ -7,7 +7,7 @@
 namespace linalg
 {
     template<typename M>
-    class Minor : public Base<Minor_tag,
+    class Minor : public Base<tags::Minor_submatrix_tag,
                               Array<typename M::value_type>,
                               typename M::allocator_type
                               >
@@ -16,7 +16,7 @@ namespace linalg
 
     public:
 
-        using base              = Base<Minor_tag,
+        using base              = Base<tags::Minor_submatrix_tag,
                                        Array<typename M::value_type>,
                                        typename M::allocator_type
                                       >;
