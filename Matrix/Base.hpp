@@ -4,6 +4,7 @@
 #include <memory>
 #include <math.h>
 
+#include "Tags.hpp"
 #include "Arrays.hpp"
 #include "Iterator.hpp"
 #include "Math.hpp"
@@ -12,11 +13,15 @@
 
 namespace linalg
 {
-    struct Dense_tag { };
-    struct Sparse_tag { };
-    struct Triangular_tag { };
-    struct Diagonal_tag { };
-    struct Minor_tag { };
+    /*namespace tags
+    {
+        struct Dense_tag { };
+        struct Sparse_tag { };
+        struct Triangular_tag { };
+        struct Diagonal_tag { };
+        struct Minor_tag { };
+
+    } */// namespace tags
 
     template<typename M>
     struct Matrix_traits
