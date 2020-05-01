@@ -105,9 +105,9 @@ namespace linalg
 
     ////////////////////////////////////////////////////////
 
-    Square_size::Square_size() { }
+    Square_matrix_size::Square_matrix_size() { }
 
-    Square_size::Square_size(std::size_t size) :
+    Square_matrix_size::Square_matrix_size(std::size_t size) :
         Matrix_size(size, size) { }
 
 } // namespace linarg

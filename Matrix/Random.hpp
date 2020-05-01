@@ -8,7 +8,8 @@
 #include <complex>
 
 #include "Arrays.hpp"
-#include "Matrix_size.hpp"
+#include "Common/Visitor.hpp"
+//#include "Matrix_size.hpp"
 #include "Traits.hpp"
 #include "Cond.hpp"
 
@@ -16,21 +17,7 @@ namespace linalg
 {
     namespace detail
     {
-        struct Size_visitor
-        {
-            Size_visitor() { }
 
-            std::size_t operator()(std::size_t size)
-            {
-                return size;
-            }
-
-            std::size_t operator()(const Matrix_size& size)
-            {
-                return size.total();
-            }
-
-        };
 
         template<typename D>
         class Random_impl
@@ -56,7 +43,7 @@ namespace linalg
 
             void add_seed()
             {
-                auto seed = std::chrono::_V2::system_clock::now().time_since_epoch().count();
+                auto seed = std::chrono::_V2::steady_clock::now().time_since_epoch().count();
                 engine_.seed(seed);
             }
 
@@ -135,7 +122,7 @@ namespace linalg
 
             Array<T> get(std::true_type)
             {
-                auto size = std::visit(detail::Size_visitor{}, size_);
+                auto size = std::visit(visitor::Objects_size_visitor{}, size_);
                 Array<T> values(size);
 
                 using dist_type = std::conditional_t<std::is_integral_v<T>, std::uniform_int_distribution<T>, std::uniform_real_distribution<T>>;
@@ -149,7 +136,7 @@ namespace linalg
 
             Array<std::complex<T>> get(std::false_type)
             {
-                auto size = std::visit(detail::Size_visitor{}, size_);
+                auto size = std::visit(visitor::Objects_size_visitor{}, size_);
                 Array<std::complex<T>> values(size);
 
                 using dist_type = std::conditional_t<std::is_integral_v<T>, std::uniform_int_distribution<T>, std::uniform_real_distribution<T>>;

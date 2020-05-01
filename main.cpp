@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Matrix/Linarg.hpp"
+#include "Tensor/Cube.tcc"
 #include <stdexcept>
 #include <functional>
 
@@ -12,27 +13,13 @@
 using Cplx_d = std::complex<int>;
 
 
-template<typename T>
-struct Function
-{
-    Function() { }
-    Function(T val) : value{val} { }
-
-    T operator()()
-    {
-        return value;
-    }
-
-    T value = {};
-};
-
 int main()
 {
-    linalg::Sparse_matrix<int> M_1{3, 4, 40.0, linalg::Random<int>{1, 9}};
-    linalg::Sparse_matrix<int> M_2;
-    M_2 = linalg::Random<int>{4, 4, 1, 9};
+    linalg::Cube<linalg::Sparse_matrix<int>> C(linalg::Matrix_size(4, 5), 50.0, 3, linalg::Random<int>{1, 9});
 
-    std::cout << M_2;
+
+    for(std::size_t i = 0; i < C.slices(); ++i)
+        std::cout << C[i] << "\n\n";
 
     return 0;
 }

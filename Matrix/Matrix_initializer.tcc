@@ -41,7 +41,7 @@ namespace linalg
         std::size_t total = std::count_if(cols_num.begin(), cols_num.end(),
                                           [first_column](std::size_t x){ return x == first_column; });
 
-        LINARG_CHECK(total == rows, Incosistent_columns())
+        LINALG_CHECK(total == rows, Incosistent_columns())
 
         size_.rows_ = rows;
         size_.cols_ = cols_num[0];

@@ -103,7 +103,7 @@ namespace linalg
     {
         std::smatch match;
 
-        for(auto x : expr_vec) LINARG_CHECK(std::regex_search(x, match, pattern_), Invalid_expression())
+        for(auto x : expr_vec) LINALG_CHECK(std::regex_search(x, match, pattern_), Invalid_expression())
     }
 
 } // namespace linarg

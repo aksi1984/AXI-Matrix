@@ -8,21 +8,20 @@
 namespace linalg
 {
     template<typename T>
+    Matrix<T>::Matrix(const Matrix_size& req_size, const allocator_type& alloc) :
+        base(req_size, alloc) { }
+
+    template<typename T>
     Matrix<T>::Matrix(size_type reqRows, size_type reqCols, const allocator_type& alloc) :
         base(reqRows, reqCols, alloc) { }
 
     template<typename T>
-    Matrix<T>::Matrix(const Matrix_size& mat_size, const allocator_type& alloc) :
-        base(mat_size, alloc) { }
-
-    template<typename T>
         template<typename U, typename>
-        Matrix<T>::Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc) :
-            base(req_rows, req_cols, alloc)
+        Matrix<T>::Matrix(const Matrix_size& req_size, Random<U> random, const allocator_type& alloc) :
+            Matrix{req_size.rows_, req_size.cols_, alloc}
         {
-            random.apply_size(Matrix_size{req_rows, req_cols});
+            random.set_size(req_size);
             Array<T> values = random.get(std::is_arithmetic<T>{});
-
             size_type count = 0;
 
             for(auto& x : *this) x = values[count++];
@@ -30,8 +29,8 @@ namespace linalg
 
     template<typename T>
         template<typename U, typename>
-        Matrix<T>::Matrix(const Matrix_size& size, Random<U> random, const allocator_type& alloc) :
-            Matrix{size.rows_, size.cols_, random, alloc} { }
+        Matrix<T>::Matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc) :
+            Matrix(Matrix_size{req_rows, req_cols}, random, alloc) { }
 
     template<typename T>
     Matrix<T>::Matrix(List<value_type> list, const allocator_type& alloc) :
@@ -116,7 +115,7 @@ namespace linalg
         Matrix<T>&
         Matrix<T>::operator=(Random<U> random)
         {
-            LINARG_CHECK(std::holds_alternative<Matrix_size>(random.size()), Bad_constructor{})
+            LINALG_CHECK(std::holds_alternative<Matrix_size>(random.size()), Bad_constructor{})
 
             if(Matrix_size new_size = std::get<0>(random.size()); new_size.total() != base::size().total())
             {

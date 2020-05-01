@@ -67,7 +67,7 @@ namespace linalg
     typename Base<Type, T, A, Alloc>::reference
     Base<Type, T, A, Alloc>::operator()(size_type i, size_type j)
     {
-        LINARG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("operator()") )
+        LINALG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("operator()") )
 
         return data_[size_.rows_ * j + i];
     }
@@ -76,7 +76,7 @@ namespace linalg
     typename Base<Type, T, A, Alloc>::const_reference
     Base<Type, T, A, Alloc>::operator()(size_type i, size_type j) const
     {
-        LINARG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("operator()") )
+        LINALG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("operator()") )
 
         return data_[size_.rows_ * j + i];
     }
@@ -85,7 +85,7 @@ namespace linalg
     typename Base<Type, T, A, Alloc>::reference
     Base<Type, T, A, Alloc>::at(size_type i, size_type j)
     {
-        LINARG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("at()") )
+        LINALG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("at()") )
 
         return data_[size_.rows_ * j + i];
     }
@@ -94,7 +94,7 @@ namespace linalg
     typename Base<Type, T, A, Alloc>::const_reference
     Base<Type, T, A, Alloc>::at(size_type i, size_type j) const
     {
-        LINARG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("at()") )
+        LINALG_CHECK( ((i < rows()) && (j < cols())), Out_of_bounds("at()") )
 
         return data_[size_.rows_ * j + i];
     }

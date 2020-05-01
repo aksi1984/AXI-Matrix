@@ -25,7 +25,7 @@ namespace linalg
         std::ostringstream ost;
         ost.precision(1);
 
-        if constexpr(std::is_same<mat_type, Sparse_tag>::value)
+        if constexpr(std::is_same<mat_type, tags::Sparse_matrix_tag>::value)
         {
             name = "Sparse matrix";
             std::string density_str = "\nDensity";
@@ -42,13 +42,13 @@ namespace linalg
                 << std::setw(2) << std::setfill(' ') << ":" << non_zeros;
 
         }
-        else if constexpr(std::is_same<mat_type, Dense_tag>::value)
+        else if constexpr(std::is_same<mat_type, tags::Dense_matrix_tag>::value)
         {
             name = "Dense matrix";
             text.insert(0, name);
             ost << text;
         }
-        else if constexpr(std::is_same<mat_type, Triangular_tag>::value)
+        else if constexpr(std::is_same<mat_type, tags::Triangular_matrix_tag>::value)
         {
             using triangular_type = typename M::triangular_fill_type;
 
@@ -75,7 +75,7 @@ namespace linalg
         return os;
     }
 
-    template<typename Char, typename Traits, typename M, typename = typename std::enable_if<!std::is_same<typename M::matrix_type, Sparse_tag>::value>::type>
+    template<typename Char, typename Traits, typename M, typename = typename std::enable_if<!std::is_same<typename M::matrix_type, tags::Sparse_matrix_tag>::value>::type>
     std::basic_istream<Char, Traits>& operator>>(std::basic_istream<Char, Traits>& is, M& mat)
     {
         Char ch;

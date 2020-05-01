@@ -11,6 +11,10 @@ namespace linalg
     {
         static_assert (std::is_arithmetic<T>::value || is_complex<T>::value, "Uncorrect type");
 
+    private:
+
+        using self_type         = Sparse_matrix<T>;
+
     public:
 
         using base              = Unbounded_matrix<tags::Sparse_matrix_tag, T>;
@@ -26,9 +30,13 @@ namespace linalg
 
         explicit Sparse_matrix(const allocator_type& alloc = allocator_type());
 
+        explicit Sparse_matrix(const Matrix_size& size, const allocator_type& alloc = allocator_type());
+
         explicit Sparse_matrix(size_type cols, size_type rows, const allocator_type& alloc = allocator_type());
 
-        explicit Sparse_matrix(const Matrix_size& size, const allocator_type& alloc = allocator_type());
+        explicit Sparse_matrix(size_type rows, size_type cols, double density, const allocator_type& alloc = allocator_type{});
+
+        explicit Sparse_matrix(const Matrix_size& req_size, double density, const allocator_type& alloc = allocator_type{});
 
         template<typename U, typename = std::enable_if_t<std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type>>>
         explicit Sparse_matrix(const Matrix_size& req_size, double density, Random<U> random, const allocator_type& alloc = allocator_type());

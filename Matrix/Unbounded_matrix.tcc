@@ -80,9 +80,9 @@ namespace linalg
     Unbounded_matrix<Type, T>
     Unbounded_matrix<Type, T>::submat(size_type beg_rows, size_type beg_cols, size_type rows, size_type cols)
     {
-        LINARG_CHECK((beg_rows < base::rows()) && (beg_cols < base::cols()), Out_of_bounds("Submat"))
-        LINARG_CHECK((base::rows() > rows) && (base::cols()) > cols, Bad_size("Submat: submatrix size is greather than matrix"))
-        LINARG_CHECK((beg_rows + rows < base::rows()) && (beg_cols + cols < base::cols()), Out_of_bounds("Submat"))
+        LINALG_CHECK((beg_rows < base::rows()) && (beg_cols < base::cols()), Out_of_bounds("Submat"))
+        LINALG_CHECK((base::rows() > rows) && (base::cols()) > cols, Bad_size("Submat: submatrix size is greather than matrix"))
+        LINALG_CHECK((beg_rows + rows < base::rows()) && (beg_cols + cols < base::cols()), Out_of_bounds("Submat"))
 
         Unbounded_matrix<Type, T> submatrix(rows, cols);
 

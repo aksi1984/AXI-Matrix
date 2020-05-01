@@ -11,7 +11,7 @@ namespace linalg
         std::size_t rows = ( dim == Dimension::Row ? size[0] - 1 : size[1] - 1 ) ;
         std::size_t cols = ( dim == Dimension::Row ? size[1] : size[0] );
 
-        LINARG_CHECK( (rows == cols), Not_square() )
+        LINALG_CHECK( (rows == cols), Not_square() )
 
         size_ = Matrix_size(rows, cols);
     }
@@ -21,7 +21,7 @@ namespace linalg
         std::size_t new_rows = size[0] - rows.size();
         std::size_t new_cols = size[1] - cols.size();
 
-        LINARG_CHECK( (new_rows == new_cols), Not_square() )
+        LINALG_CHECK( (new_rows == new_cols), Not_square() )
 
         size_ = Matrix_size(new_rows, new_cols);
 

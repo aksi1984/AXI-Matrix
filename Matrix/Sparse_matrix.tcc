@@ -10,24 +10,24 @@ namespace linalg
         base(alloc) { }
 
     template<typename T>
+    Sparse_matrix<T>::Sparse_matrix(const Matrix_size& size, const allocator_type& alloc) :
+        base(size.rows_, size.cols_, alloc) { }
+
+    template<typename T>
     Sparse_matrix<T>::Sparse_matrix(size_type rows, size_type cols, const allocator_type& alloc) :
         base(rows, cols, alloc),
         zeros_(rows * cols) { }
 
     template<typename T>
-    Sparse_matrix<T>::Sparse_matrix(const Matrix_size& size, const allocator_type& alloc) :
-        Sparse_matrix<T>(size.rows_, size.cols_, alloc) { }
-
-    template<typename T>
         template<typename U, typename>
-        Sparse_matrix<T>::Sparse_matrix(size_type req_rows, size_type req_cols, double density, Random<U> random, const allocator_type& alloc) :
-            base(req_rows, req_cols, alloc)
+        Sparse_matrix<T>::Sparse_matrix(const Matrix_size& req_size, double density, Random<U> random, const allocator_type& alloc) :
+            base{req_size.rows_, req_size.cols_, alloc}
         {
-            LINARG_CHECK(((density >= 0.0) && (density < 100.0)), Invalid_density(density))
+            LINALG_CHECK(((density >= 0.0) && (density < 100.0)), Invalid_density(density))
 
             Array<std::size_t> locations = detail::random_locations(base::size(), density);
 
-            random.apply_size(Matrix_size{req_rows, req_cols});
+            random.set_size(req_size);
             Array<T> values = random.get(std::is_arithmetic<T>{});
 
             for(size_type i = 0; i < locations.size(); ++i)
@@ -38,8 +38,8 @@ namespace linalg
 
     template<typename T>
         template<typename U, typename>
-        Sparse_matrix<T>::Sparse_matrix(const Matrix_size& req_size, double density, Random<U> random, const allocator_type& alloc) :
-            Sparse_matrix{req_size.rows_, req_size.cols_, density, random, alloc} { }
+        Sparse_matrix<T>::Sparse_matrix(size_type req_rows, size_type req_cols, double density, Random<U> random, const allocator_type& alloc) :
+            self_type(Matrix_size{req_rows, req_cols}, density, random, alloc) { }
 
     template<typename T>
     Sparse_matrix<T>::Sparse_matrix(const Sparse_matrix<T>& copy) :

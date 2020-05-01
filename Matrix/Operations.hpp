@@ -33,7 +33,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.rows(), lhs.cols(),
+                LINALG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.rows(), lhs.cols(),
                                                                          rhs.rows(), rhs.cols()))
 
                 result_type result(lhs.rows(), lhs.cols());
@@ -65,7 +65,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.size(), rhs.size()))
+                LINALG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.size(), rhs.size()))
 
                 result_type result(lhs.size());
 
@@ -88,7 +88,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.rows(), lhs.cols(),
+                LINALG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.rows(), lhs.cols(),
                                                                          rhs.rows(), rhs.cols()))
 
                 result_type result(lhs.rows(), lhs.cols());
@@ -120,7 +120,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.size(), rhs.size()))
+                LINALG_CHECK(lhs.size() == rhs.size(), Incompatible_size("Plus", lhs.size(), rhs.size()))
 
                 result_type result(lhs.size());
 
@@ -143,7 +143,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK( (lhs.rows() == rhs.cols()) && (lhs.cols() == rhs.rows()), Incompatible_size() )
+                LINALG_CHECK( (lhs.rows() == rhs.cols()) && (lhs.cols() == rhs.rows()), Incompatible_size() )
 
                 result_type result(lhs.rows(), rhs.cols());
 
@@ -178,7 +178,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK( lhs.size() == rhs.size(), Incompatible_size(lhs.size(), rhs.size()) )
+                LINALG_CHECK( lhs.size() == rhs.size(), Incompatible_size(lhs.size(), rhs.size()) )
 
                 result_type result(lhs.size());
 
@@ -294,7 +294,7 @@ namespace linalg
 
             result_type operator()(lhs_type lhs, rhs_type scalar)
             {
-                LINARG_CHECK( scalar != 0, Divide_by_zero("Scalar divide") )
+                LINALG_CHECK( scalar != 0, Divide_by_zero("Scalar divide") )
 
                 result_type result(lhs.size());
 
@@ -354,7 +354,7 @@ namespace linalg
 
             bool operator()(lhs_type lhs, rhs_type rhs)
             {
-                LINARG_CHECK( lhs.size() == rhs.size(), Incompatible_size(lhs.size(), rhs.size()) )
+                LINALG_CHECK( lhs.size() == rhs.size(), Incompatible_size(lhs.size(), rhs.size()) )
 
                 auto lhs_iter = lhs.begin();
                 auto rhs_iter = rhs.begin();

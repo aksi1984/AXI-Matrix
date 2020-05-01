@@ -6,21 +6,6 @@
 
 namespace linalg
 {
-    /*template<typename T>
-    Matrix<T> make_diagonal(const Vector<T>& vec)
-    {
-        Matrix<T> mat(vec.size(), vec.size());
-
-        using size_type = typename Matrix<T>::size_type;
-
-        for(size_type i = 0; i < mat.rows(); ++i)
-        {
-            mat(i, i) = vec[i];
-        }
-
-        return mat;
-    }*/
-
     template<typename T>
     Matrix<T> make_band(const Vector<T>& diag, const Vector<T>& upper, const Vector<T>& lower)
     {
@@ -68,22 +53,10 @@ namespace linalg
         }
     }
 
-    /*template<typename R>
-    Matrix<typename R::result_type> make_triangle(R random, Triangle_type type)
-    {
-        LINARG_CHECK( (random.size().rows_ == random.size().cols_),
-                      Bad_size("make_traingle: the number of rows is not equal to the number of columns") )
-
-        Matrix<typename R::result_type> mat(random);
-        transform_to_triangle(mat, type);
-
-        return mat;
-    }*/
-
     template<typename T>
     Matrix<T> make_symmetric(const Vector<T>& diag, const Vector<T>& triangle)
     {        
-        LINARG_CHECK( (triangle.size() == (( std::pow(diag.size(), 2) - diag.size()) / 2)),
+        LINALG_CHECK( (triangle.size() == (( std::pow(diag.size(), 2) - diag.size()) / 2)),
                       Bad_size("Bad size of triangle vector") )
 
         Matrix<T> mat = make_diagonal(diag);

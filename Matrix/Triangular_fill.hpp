@@ -64,7 +64,7 @@ namespace linalg
             typename detail::Compare<N, value_type>::type pred;
             using size_type = typename MS::size_type;
             std::size_t non_zeros_size = detail::calc_non_zero<N>(rows);
-            random.apply_size(non_zeros_size);
+            random.set_size(non_zeros_size);
 
             Array<value_type> values = random.get(std::is_arithmetic<value_type>{});
 

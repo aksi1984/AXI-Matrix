@@ -7,6 +7,7 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+    Common/Visitor.hpp \
     Matrix/Algorithms.hpp \
     Matrix/Aliases.h \
     Matrix/Arrays.hpp \
@@ -39,6 +40,7 @@ HEADERS += \
     Matrix/Random.hpp \
     Matrix/Sparse_matrix.hpp \
     Matrix/Sparse_matrix.tcc \
+    Matrix/Tags.hpp \
     Matrix/Traits.hpp \
     Matrix/Triangular_fill.hpp \
     Matrix/Triangular_matrix.hpp \
@@ -47,7 +49,12 @@ HEADERS += \
     Matrix/Unbounded_matrix.hpp \
     Matrix/Unbounded_matrix.tcc \
     Matrix/Vector.hpp \
-    Matrix/Vector.tcc
+    Matrix/Vector.tcc \
+    Tensor/Cube.hpp \
+    Tensor/Cube.tcc \
+    Tensor/Tensor_base.hpp \
+    Tensor/Tensor_base.tcc \
+    Tensor/Tensor_size.hpp
 
 INCLUDEPATH += D:\Libraries\armadillo-8.600.0\include
 DEPENDPATH += D:\Libraries\armadillo-8.600.0\include

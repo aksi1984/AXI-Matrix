@@ -11,25 +11,30 @@ namespace linalg
         initialized_{false} { }
 
     template<typename T, typename Tr>
-    Triangular_matrix<T, Tr>::Triangular_matrix(size_type size, value_type value, const allocator_type& alloc) :
-        base(size, size, alloc)
+    Triangular_matrix<T, Tr>::Triangular_matrix(const Square_matrix_size& req_size, value_type value, const allocator_type& alloc) :
+        base(req_size.rows_, req_size.cols_, alloc)
     {
         triangular_fill_type::fill(base::rows(), base::cols(), base::data_, value, std::integral_constant<bool, true>{});
         initialized_ = true;
     }
 
     template<typename T, typename Tr>
-    Triangular_matrix<T, Tr>::Triangular_matrix(const Square_size& size, value_type value, const allocator_type& alloc) :
-        self_type(size.rows_, value, alloc) { }
+    Triangular_matrix<T, Tr>::Triangular_matrix(size_type size, value_type value, const allocator_type& alloc) :
+        self_type(Square_matrix_size{size}, value, alloc) { }
 
     template<typename T, typename Tr>
         template<typename U, typename>
-        Triangular_matrix<T, Tr>::Triangular_matrix(size_type req_size, Random<U> random, const allocator_type& alloc) :
-            base(req_size, req_size, alloc)
+        Triangular_matrix<T, Tr>::Triangular_matrix(const Square_matrix_size& req_size, Random<U> random, const allocator_type& alloc) :
+            base(req_size.rows_, req_size.cols_, alloc)
         {
             triangular_fill_type::fill(base::rows(), base::cols(), base::data_, random);
             initialized_ = true;
         }
+
+    template<typename T, typename Tr>
+        template<typename U, typename>
+        Triangular_matrix<T, Tr>::Triangular_matrix(size_type req_size, Random<U> random, const allocator_type& alloc) :
+            self_type(Square_matrix_size{req_size}, random, alloc) { }
 
     template<typename T, typename Tr>
         template<typename Function, typename>
@@ -91,9 +96,9 @@ namespace linalg
         Triangular_matrix<T, Tr>&
         Triangular_matrix<T, Tr>::operator=(Random<U> random)
         {
-            LINARG_CHECK(std::holds_alternative<size_type>(random.size()), Bad_constructor{})
+            LINALG_CHECK(std::holds_alternative<Square_matrix_size>(random.size()), Bad_constructor{})
 
-            if(size_type new_size = std::get<1>(random.size()); (new_size * new_size) != base::size().total())
+            if(Square_matrix_size new_size = std::get<1>(random.size()); new_size.total() != base::size().total())
             {
                 Triangular_matrix<T, Tr> temp{new_size, 0};
                 *this = temp;
@@ -134,8 +139,7 @@ namespace linalg
         using compare = typename detail::Compare<triangular_fill_type::compare_number, value_type>::type;
         compare comp;
 
-        LINARG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j,
-                     "Attempt to change zero index."))
+        LINALG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j, "Attempt to change zero index."))
 
         return  base::operator()(i, j);
     }
@@ -154,8 +158,7 @@ namespace linalg
         using compare = typename detail::Compare<triangular_fill_type::compare_number, value_type>::type;
         compare comp;
 
-        LINARG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j,
-                     "Attempt to change zero index."))
+        LINALG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j, "Attempt to change zero index."))
 
         return  base::operator()(i, j);
     }
