@@ -1,0 +1,4 @@
+#ifndef CUBE_SUBVIEW_HPP
+#define CUBE_SUBVIEW_HPP
+
+#endif // CUBE_SUBVIEW_HPP
