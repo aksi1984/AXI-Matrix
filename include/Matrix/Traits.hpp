@@ -5,8 +5,8 @@
 //#include <vector>
 //#include <initializer_list>
 
-#include "Container.hpp"
-#include "Aliases.h"
+//#include "Container.hpp"
+#include "include/Matrix/Aliases.h"
 
 namespace linalg
 {

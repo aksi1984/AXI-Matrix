@@ -71,6 +71,13 @@ namespace linalg
         data_.clear();
     }
 
+    template<typename Obj, typename C, typename Alloc>
+    Obj
+    Tensor<Obj, C, Alloc>::slice(size_type req_slice)
+    {
+        return data_[req_slice];
+    }
+
 } // namespace linalg
 
 #endif // TENSOR_BASE_TCC

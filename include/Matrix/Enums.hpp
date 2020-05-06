@@ -3,11 +3,11 @@
 
 namespace linalg
 {
-    enum Dimension
+    /*enum Dimension
     {
         Row,
         Col
-    };
+    };*/
 
 } // namespace axi
 

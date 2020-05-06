@@ -2,7 +2,7 @@
 #define IO_HPP
 
 #include "Base.hpp"
-#include "Vector.hpp"
+#include "include/Vector/Vector.hpp"
 #include "Triangular_fill.hpp"
 #include "Algorithms.hpp"
 

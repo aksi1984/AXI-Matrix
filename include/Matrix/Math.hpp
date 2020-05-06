@@ -1,8 +1,8 @@
 #ifndef MATH_HPP
 #define MATH_HPP
 
-#include "Vector.hpp"
-#include "Enums.hpp"
+#include "include/Vector/Vector.hpp"
+#include "include/Matrix/Enums.hpp"
 
 
 namespace linalg

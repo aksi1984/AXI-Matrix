@@ -2,7 +2,6 @@
 #define BASE_TCC
 
 #include "Base.hpp"
-#include "Arrays.hpp"
 
 namespace linalg
 {

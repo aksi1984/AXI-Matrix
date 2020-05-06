@@ -1,8 +1,8 @@
 #ifndef SPARSE_MATRIX_HPP
 #define SPARSE_MATRIX_HPP
 
-#include "Unbounded_matrix.hpp"
-#include "Random.hpp"
+#include "include/Matrix/Unbounded_matrix.tcc"
+#include "include/Matrix/Random.hpp"
 
 namespace linalg
 {

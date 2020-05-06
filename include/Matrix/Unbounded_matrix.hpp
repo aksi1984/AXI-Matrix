@@ -1,12 +1,12 @@
 #ifndef UNBOUNDED_MATRIX_HPP
 #define UNBOUNDED_MATRIX_HPP
 
-#include "Base.tcc"
-#include "Arrays.hpp"
-#include "Diagonal_elems.hpp"
-#include "Trivec.hpp"
-#include "Random.hpp"
-#include "Operations.hpp"
+#include "include/Storage/Arrays.hpp"
+#include "include/Matrix/Base.tcc"
+#include "include/Matrix/Diagonal_elems.hpp"
+#include "include/Matrix/Trivec.hpp"
+#include "include/Matrix/Random.hpp"
+#include "include/Matrix/Operations.hpp"
 
 namespace linalg
 {

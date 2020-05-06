@@ -7,18 +7,15 @@
 #include <algorithm>
 #include <complex>
 
-#include "Arrays.hpp"
-#include "Common/Visitor.hpp"
-//#include "Matrix_size.hpp"
-#include "Traits.hpp"
-#include "Cond.hpp"
+#include "include/Storage/Arrays.hpp"
+#include "include/Common/Visitor.hpp"
+#include "include/Matrix/Traits.hpp"
+#include "include/Matrix/Cond.hpp"
 
 namespace linalg
 {
     namespace detail
     {
-
-
         template<typename D>
         class Random_impl
         {

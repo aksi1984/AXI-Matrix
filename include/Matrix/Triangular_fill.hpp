@@ -2,7 +2,7 @@
 #define TRIANGULAR_FILL_HPP
 
 #include <complex>
-#include "Traits.hpp"
+#include "include/Matrix/Traits.hpp"
 
 namespace linalg
 {

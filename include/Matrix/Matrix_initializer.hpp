@@ -6,11 +6,11 @@
 #include <algorithm>
 #include <initializer_list>
 
-#include "Arrays.hpp"
+#include "include/Storage/Arrays.hpp"
 #include "Cond.hpp"
 #include "Matrix_size.tcc"
 #include "Traits.hpp"
-#include "Exception.hpp"
+#include "include/Exceptions/Exception.hpp"
 
 
 namespace linalg

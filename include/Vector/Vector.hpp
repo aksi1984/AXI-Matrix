@@ -1,16 +1,14 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include "Container.hpp"
-#include "Matrix_initializer.hpp"
-#include "Random.hpp"
+#include "include/Matrix/Matrix_initializer.tcc"
+#include "include/Matrix/Random.hpp"
+#include "include/Matrix/Operations.hpp"
+#include "include/Matrix/Traits.hpp"
+#include "include/Matrix/Cond.hpp"
+#include "include/Matrix/Aliases.h"
+#include "include/Matrix/Iterator.hpp"
 
-#include "Operations.hpp"
-#include "Traits.hpp"
-#include "Cond.hpp"
-#include "Aliases.h"
-#include "Iterator.hpp"
-#include "Base.hpp"
 
 namespace linalg
 {

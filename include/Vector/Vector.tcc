@@ -1,8 +1,8 @@
 #ifndef VECTOR_TCC
 #define VECTOR_TCC
 
-#include "Vector.hpp"
-#include "Expression.hpp"
+#include "include/Vector/Vector.hpp"
+#include "include/Matrix/Expression.hpp"
 
 namespace linalg
 {

@@ -2,8 +2,8 @@
 #define OPERATIONS_HPP
 
 #include "Matrix_size.hpp"
-#include "Traits.hpp"
-#include "Exception.hpp"
+#include "include/Matrix/Traits.hpp"
+#include "include/Exceptions/Exception.hpp"
 
 #include <iostream>
 #include <functional>

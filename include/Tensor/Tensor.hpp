@@ -33,6 +33,8 @@ namespace linalg
 
         void clear();
 
+        Obj slice(size_type req_slice);
+
     protected:
 
         container_type data_;

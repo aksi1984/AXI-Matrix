@@ -102,7 +102,7 @@ namespace linalg
             }
         }
 
-        template<typename M, typename Pred>
+        /*template<typename M, typename Pred>
         bool any_of(M mat, std::size_t n, Dimension dim, Pred pred)
         {
             std::size_t count;
@@ -125,7 +125,7 @@ namespace linalg
             using value_type = typename M::value_type;
 
             return any(mat, n, dim, [](value_type val){ return compare(val); });
-        }
+        }*/
 
         enum Sort_dir
         {

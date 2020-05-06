@@ -1,7 +1,7 @@
 #ifndef GENERATED_HPP
 #define GENERATED_HPP
 
-#include "Vector.hpp"
+#include "include/Vector/Vector.hpp"
 #include "Matrix.hpp"
 
 namespace linalg

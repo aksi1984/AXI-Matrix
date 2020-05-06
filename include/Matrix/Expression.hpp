@@ -6,8 +6,8 @@
 #include <iostream>
 
 #include "Conversions.hpp"
-#include "Exception.hpp"
-#include "Aliases.h"
+#include "include/Exceptions/Exception.hpp"
+#include "include/Matrix/Aliases.h"
 
 namespace linalg
 {

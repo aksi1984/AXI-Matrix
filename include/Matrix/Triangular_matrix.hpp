@@ -1,8 +1,8 @@
 #ifndef DIAGONAL_MATRIX_HPP
 #define DIAGONAL_MATRIX_HPP
 
-#include "Base.hpp"
-#include "Triangular_fill.hpp"
+#include "include/Matrix/Base.hpp"
+#include "include/Matrix/Triangular_fill.hpp"
 
 namespace linalg
 {

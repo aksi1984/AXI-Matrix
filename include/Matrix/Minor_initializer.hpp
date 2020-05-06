@@ -1,7 +1,8 @@
 #ifndef MINOR_INITIALIZER_HPP
 #define MINOR_INITIALIZER_HPP
 
-#include "Math.hpp"
+#include "include/Matrix/Math.hpp"
+#include "Container.hpp"
 
 namespace linalg
 {

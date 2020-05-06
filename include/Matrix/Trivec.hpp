@@ -1,7 +1,7 @@
 #ifndef TRIVEC_HPP
 #define TRIVEC_HPP
 
-#include "Vector.hpp"
+#include "include/Vector/Vector.hpp"
 
 namespace linalg
 {

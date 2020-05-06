@@ -1,7 +1,7 @@
 #ifndef DIAGVEC_HPP
 #define DIAGVEC_HPP
 
-#include "Arrays.hpp"
+#include "include/Storage/Arrays.hpp"
 
 namespace linalg
 {
