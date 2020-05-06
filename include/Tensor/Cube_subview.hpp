@@ -3,6 +3,7 @@
 
 #include "Cube.hpp"
 #include "Cube_subview_elems_fill.hpp"
+#include "include/Common/Visitor.hpp"
 
 namespace linalg
 {
@@ -31,21 +32,24 @@ namespace linalg
 
         Cube_subview();
 
-        Cube_subview(const CubeType& cube, size_type n);
+        Cube_subview(CubeType* cube_ptr, size_type elem);
 
-        Cube_subview(const CubeType& cube, size_type first, size_type last);
-
-        Cube_subview(const CubeType& cube, std::initializer_list<size_type> indices);
+        Cube_subview(CubeType* cube_ptr, size_type elem_first, size_type elem_last);
 
         void fill(value_type value);
 
-        void update(CubeType& cube);
 
     private:
 
+        void set_slices(CubeType cube, size_type elem_first, size_type elem_last);
+
+        void set_slices(CubeType cube, std::initializer_list<size_type> elems);
+
         size_type slices_;
 
-        std::variant<size_type, std::pair<size_type, size_type>, std::initializer_list<size_type>> elems_;
+        std::variant<size_type, std::pair<size_type, size_type>> elems_;
+
+        CubeType* cube_ptr_;
 
     };
 
