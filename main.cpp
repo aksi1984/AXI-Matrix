@@ -1,6 +1,4 @@
 #include <iostream>
-#include "Matrix/Linarg.hpp"
-#include "Tensor/Cube.tcc"
 #include <stdexcept>
 #include <functional>
 
@@ -10,16 +8,38 @@
 #include <regex>
 #include <list>
 
-using Cplx_d = std::complex<int>;
+#include "include/Linalg.hpp"
+#include "include/Matrix/Submatrix.tcc"
 
+
+template<typename T>
+using cube = linalg::Cube<linalg::Matrix<T>>;
+
+
+struct Visitor
+{
+    void operator()(std::pair<linalg::Index<linalg::Range>, linalg::Index<linalg::Range>> ind)
+    {
+
+    }
+
+};
 
 int main()
 {
-    linalg::Cube<linalg::Sparse_matrix<int>> C(linalg::Matrix_size(4, 5), 50.0, 3, linalg::Random<int>{1, 9});
+    linalg::Matrix<int> M
+    {
+        {1,2,3,4},
+        {5,4,3,2},
+        {6,3,2,5},
+        {5,3,6,7}
+    };
 
+    linalg::Submatrix<linalg::Matrix<int>> SM(M, linalg::Index<linalg::Range>{0, 2}, linalg::Index<linalg::Range>{1, 2});
 
-    for(std::size_t i = 0; i < C.slices(); ++i)
-        std::cout << C[i] << "\n\n";
+    std::cout << SM;
+
+    //std::cout << SM;
 
     return 0;
 }
