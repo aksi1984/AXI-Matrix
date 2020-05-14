@@ -6,21 +6,20 @@
 namespace linalg
 {
     template<typename Mat>
-    Cube<Mat>::Cube(const allocator_type& alloc) :
-        base(alloc) { }
+    Cube<Mat>::Cube() { }
 
     template<typename Mat>
-    Cube<Mat>::Cube(const Matrix_size& req_size, size_type slices, const allocator_type& alloc) :
-        base(slices, Mat(req_size), alloc) { }
+    Cube<Mat>::Cube(const Matrix_size& req_size, size_type slices) :
+        base(slices, Mat(req_size)) { }
 
     template<typename Mat>
-    Cube<Mat>::Cube(size_type req_rows, size_type req_cols, size_type slices, const allocator_type& alloc) :
-        self_type(Matrix_size{req_rows, req_cols}, slices, alloc) { }
+    Cube<Mat>::Cube(size_type req_rows, size_type req_cols, size_type slices) :
+        self_type(Matrix_size{req_rows, req_cols}, slices) { }
 
     template<typename Mat>
         template<typename U>
-        Cube<Mat>::Cube(const Matrix_size& req_size, size_type slices, Random<U> random, const allocator_type& alloc) :
-            base(slices, alloc)
+        Cube<Mat>::Cube(const Matrix_size& req_size, size_type slices, Random<U> random) :
+            base(slices)
         {
             for(size_type i = 0; i < base::slices(); ++i)
             {
@@ -30,8 +29,8 @@ namespace linalg
 
     template<typename Mat>
         template<typename U>
-        Cube<Mat>::Cube(const Matrix_size& req_size, double density, size_type slices, Random<U> random, const allocator_type& alloc) :
-            base(slices, alloc)
+        Cube<Mat>::Cube(const Matrix_size& req_size, double density, size_type slices, Random<U> random) :
+            base(slices)
         {
             for(size_type i = 0; i < base::slices(); ++i)
             {
@@ -41,8 +40,8 @@ namespace linalg
 
     template<typename Mat>
         template<typename U>
-        Cube<Mat>::Cube(const Square_matrix_size& req_size, size_type slices, Random<U> random, const allocator_type& alloc) :
-            base(slices, alloc)
+        Cube<Mat>::Cube(const Square_matrix_size& req_size, size_type slices, Random<U> random) :
+            base(slices)
         {
             for(size_type i = 0; i < base::slices(); ++i)
             {

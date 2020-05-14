@@ -14,7 +14,6 @@ namespace linalg
     template<typename T>
     class Matrix : public Unbounded_matrix<tags::Dense_matrix_tag, T>
     {
-        static_assert (std::is_arithmetic<T>::value || is_complex<T>::value, "Uncorrect type");
 
     private:
 

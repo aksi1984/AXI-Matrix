@@ -164,6 +164,16 @@ namespace linalg
     }
 
     template<typename T, typename Tr>
+        template<typename VectorType>
+        VectorType Triangular_matrix<T, Tr>::non_zeros()
+        {
+            VectorType vector;
+            triangular_fill_type::non_zeros(base::data_, base::rows(), base::cols(), vector);
+
+            return vector;
+        }
+
+    template<typename T, typename Tr>
     template<typename Container>
     void
     Triangular_matrix<T, Tr>::resize(Container container)

@@ -4,7 +4,7 @@
 #include "include/Storage/Arrays.hpp"
 #include "include/Matrix/Base.tcc"
 #include "include/Matrix/Diagonal_elems.hpp"
-#include "include/Matrix/Trivec.hpp"
+//#include "include/Matrix/Trivec.hpp"
 #include "include/Matrix/Random.hpp"
 #include "include/Matrix/Operations.hpp"
 

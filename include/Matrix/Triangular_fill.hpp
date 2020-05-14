@@ -49,6 +49,7 @@ namespace linalg
             }
         }
 
+
     } // namespace detail
 
 
@@ -110,6 +111,32 @@ namespace linalg
                 {
                     value_type value = pred(i, j) ? value_type{} : function();
                     matrix_storage[rows * j + i] = value;
+                }
+            }
+        }
+
+        template<typename MS, typename VectorType>
+        static void non_zeros(const MS& matrix_storage, std::size_t rows, std::size_t cols, VectorType& vector)
+        {
+            using value_type = typename MS::value_type;
+            using size_type = typename MS::size_type;
+
+            typename detail::Compare<N, value_type>::type pred;
+
+            size_type size = detail::calc_non_zero<N>(rows);
+
+            vector.resize(size);
+            size_type count = 0;
+
+            for(size_type i = 0; i < rows; ++i)
+            {
+                for(size_type j = 0; j < cols; ++j)
+                {
+                    if(!pred(i, j))
+                    {
+                        vector[count] = matrix_storage[rows * j + i];
+                        count++;
+                    }
                 }
             }
         }

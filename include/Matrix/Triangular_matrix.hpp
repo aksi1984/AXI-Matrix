@@ -70,6 +70,10 @@ namespace linalg
 
         virtual reference at(size_type i, size_type j) override;
 
+        template<typename VectorType>
+        VectorType non_zeros();
+
+
     private:
         template<typename Container>
         void resize(Container container);

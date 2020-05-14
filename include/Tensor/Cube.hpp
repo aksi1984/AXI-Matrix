@@ -23,20 +23,20 @@ namespace linalg
         using size_type         = typename base::size_type;
         using allocator_type    = typename base::allocator_type;
 
-        explicit Cube(const allocator_type& alloc = allocator_type{});
+        Cube();
 
-        explicit Cube(const Matrix_size& req_size, size_type slices, const allocator_type& alloc = allocator_type{});
+        Cube(const Matrix_size& req_size, size_type slices);
 
-        explicit Cube(size_type rows, size_type cols, size_type slices, const allocator_type& alloc = allocator_type{});
-
-        template<typename U>
-        explicit Cube(const Matrix_size& req_size, size_type slices, Random<U> random, const allocator_type& alloc = allocator_type{});
+        Cube(size_type rows, size_type cols, size_type slices);
 
         template<typename U>
-        explicit Cube(const Matrix_size& req_size, double density, size_type slices, Random<U> random, const allocator_type& alloc = allocator_type{});
+        Cube(const Matrix_size& req_size, size_type slices, Random<U> random);
 
         template<typename U>
-        explicit Cube(const Square_matrix_size& req_size, size_type slices, Random<U> random, const allocator_type& alloc = allocator_type{});
+        Cube(const Matrix_size& req_size, double density, size_type slices, Random<U> random);
+
+        template<typename U>
+        Cube(const Square_matrix_size& req_size, size_type slices, Random<U> random);
 
         Cube(const Cube& copy);
 

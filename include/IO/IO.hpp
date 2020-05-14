@@ -8,6 +8,7 @@
 #include "include/Matrix/Matrix.hpp"
 #include "include/Matrix/Sparse_matrix.hpp"
 #include "include/Matrix/Triangular_matrix.hpp"
+#include "include/Matrix/Submatrix.hpp"
 #include "include/Tensor/Cube.hpp"
 #include "include/Tensor/Cube_subview.hpp"
 
@@ -17,7 +18,7 @@ namespace linalg
     namespace detail
     {
         template<typename Char, typename Traits, typename M>
-        void print(std::basic_ostream<Char, Traits>& os, M mat)
+        void print(std::basic_ostream<Char, Traits>& os, const M& mat)
         {
             for(std::size_t i = 0; i < mat.rows(); ++i)
             {
@@ -81,14 +82,30 @@ namespace linalg
     }
 
     template<typename Char, typename Traits, typename T, typename Tr>
-    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, Triangular_matrix<T, Tr> mat)
+    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const Triangular_matrix<T, Tr>& mat)
     {
         using triangular_fill_type = Tr;
         std::string triangular_fill_type_str = ( std::is_same<triangular_fill_type, Upper>::value ? "upper" : (std::is_same<triangular_fill_type, Lower>::value ? "lower" : "diagonal") );
 
-        os << triangular_fill_type_str;
+        os << triangular_fill_type_str << "\n\n";
 
         detail::print(os, mat);
+
+        return os;
+    }
+
+    template<typename Char, typename Traits, typename M>
+    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const Submatrix<M>& sub)
+    {
+        os << "Submatrix: ";
+
+        auto variant = sub.indexes();
+
+        std::visit(visitor::Index_IO_visitor{}, variant);
+
+        os << "\n\n";
+
+        detail::print(os, sub);
 
         return os;
     }

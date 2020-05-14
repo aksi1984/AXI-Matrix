@@ -15,7 +15,7 @@ namespace linalg
 
     ////////////////////////////////////////
 
-    template<typename CubeType, typename L>
+    template<typename CubeType, typename FT>
     class Cube_subview : public Tensor<Matrix<typename Matrix_value_type<typename CubeType::value_type>::type>>
     {
     private:
@@ -24,9 +24,9 @@ namespace linalg
 
     public:
 
-        using matrix_type       = typename CubeType::value_type;
-        using value_type        = typename matrix_type::value_type;
-        using layout_type       = L;
+        using object_type       = typename CubeType::object_type;
+        using value_type        = typename object_type::value_type;
+        using fill_type         = FT;
         using size_type         = std::size_t;
         using allocator_type    = typename base::allocator_type;
 

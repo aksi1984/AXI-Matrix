@@ -9,7 +9,6 @@ namespace linalg
     template<typename T>
     class Sparse_matrix : public Unbounded_matrix<tags::Sparse_matrix_tag, T>
     {
-        static_assert (std::is_arithmetic<T>::value || is_complex<T>::value, "Uncorrect type");
 
     private:
 
