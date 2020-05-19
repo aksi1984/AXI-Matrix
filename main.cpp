@@ -8,36 +8,33 @@
 #include <regex>
 #include <list>
 
-#include "include/Linalg.hpp"
-#include "include/Matrix/Submatrix.tcc"
+#include "include/Axi.hpp"
+
 
 
 template<typename T>
-using cube = linalg::Cube<linalg::Matrix<T>>;
+using cube = axi::Cube<axi::Matrix<T>>;
 
+using mat_ptr = std::shared_ptr<axi::Matrix<int>>;
 
-struct Visitor
-{
-    void operator()(std::pair<linalg::Index<linalg::Range>, linalg::Index<linalg::Range>> ind)
-    {
-
-    }
-
-};
+using tr_int = axi::Triangular_matrix<int, axi::Upper>;
 
 int main()
 {
-    linalg::Matrix<int> M
-    {
-        {1,2,3,4},
-        {5,4,3,2},
-        {6,3,2,5},
-        {5,3,6,7}
-    };
+    tr_int tr(5, 5);
 
-    linalg::Submatrix<linalg::Matrix<int>> SM(M, linalg::Index<linalg::Range>{0, 2}, linalg::Index<linalg::Range>{1, 2});
+
+    axi::Submatrix<tr_int> SM(tr, axi::Index<axi::Range>{0, 2}, axi::Index<axi::Range>{1, 2});
+    SM.fill(1);
+    //auto SM = M.submatrix(axi::Index<axi::Selected>{1, 3}, axi::Index<axi::Selected>{0, 1});
+
+    //std::cout << "\n\n";
+
+    //SM.fill(1);
+    //std::cout << M;
 
     std::cout << SM;
+
 
     //std::cout << SM;
 

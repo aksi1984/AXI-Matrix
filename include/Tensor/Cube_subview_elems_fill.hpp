@@ -4,16 +4,8 @@
 #include "include/Storage/Arrays.hpp"
 #include "include/Matrix/Matrix.hpp"
 
-namespace linalg
+namespace axi
 {
-
-template<typename T>
-struct gett
-{
-    using begin = typename T::value_type;
-    using type = typename begin::value_type;
-};
-
     struct Row
     {
 

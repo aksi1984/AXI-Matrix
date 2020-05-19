@@ -6,7 +6,7 @@
 
 #include "Tags.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename T>
     class Index;

@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-namespace linalg
+namespace axi
 {
     #define LINALG_CHECK(expr, e)  \
             if( !(expr) )          \

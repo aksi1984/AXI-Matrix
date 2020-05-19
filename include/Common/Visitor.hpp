@@ -4,7 +4,7 @@
 #include "include/Matrix/Matrix_size.tcc"
 #include "include/Matrix/Index.hpp"
 
-namespace linalg
+namespace axi
 {
     namespace visitor
     {
@@ -36,45 +36,47 @@ namespace linalg
         };
 
 
+        template<typename Char, typename Traits>
         struct Index_IO_visitor
         {
+            Index_IO_visitor(std::basic_ostream<Char, Traits>& os) :
+                os_{os} { }
+
             void operator()(const std::pair<Index<Range>, Index<Range>>& indexes)
             {
-
-
-                std::cout << "Cols: {" << indexes.first.first() << "-" << indexes.second.last() << "}, rows: {" << indexes.second.first() << "-" << indexes.second.last() << "}";
+                os_ << "Cols: {" << indexes.first.first() << "-" << indexes.second.last() << "}, rows: {" << indexes.second.first() << "-" << indexes.second.last() << "}";
             }
 
             void operator()(const std::pair<Index<Selected>, Index<Selected>>& indexes)
             {
-                //std::basic_ostream<Char, Traits> os;
-
-                std::cout << "Cols : {";
+                os_ << "Cols : {";
 
                 for(std::size_t i = 0; i < indexes.first.size(); ++i)
                 {
-                    std::cout << indexes.first[i];
+                    os_ << indexes.first[i];
 
                     if(i != indexes.first.size() - 1)
                     {
-                       std::cout << ", ";
+                       os_ << ", ";
                     }
                 }
 
-                std::cout << "}, Rows: {";
+                os_ << "}, Rows: {";
 
                 for(std::size_t i = 0; i < indexes.second.size(); ++i)
                 {
-                    std::cout << indexes.second[i];
+                    os_ << indexes.second[i];
 
                     if(i != indexes.second.size() - 1)
                     {
-                        std::cout << ", ";
+                        os_ << ", ";
                     }
                 }
 
-                 std::cout << "}";
+                 os_ << "}";
             }
+
+            std::basic_ostream<Char, Traits> os_;
         };
 
     } // namespace visitor

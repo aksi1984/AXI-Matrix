@@ -3,7 +3,7 @@
 
 #include "Cube.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename Mat>
     Cube<Mat>::Cube() { }

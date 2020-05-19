@@ -7,10 +7,10 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+    include/Axi.hpp \
     include/Common/Visitor.hpp \
     include/Exceptions/Exception.hpp \
     include/IO/IO.hpp \
-    include/Linalg.hpp \
     include/Matrix/Algorithms.hpp \
     include/Matrix/Aliases.h \
     include/Matrix/Base.hpp \

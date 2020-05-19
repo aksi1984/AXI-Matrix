@@ -4,7 +4,7 @@
 #include "include/Vector/Vector.hpp"
 #include "Matrix.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename T>
     Matrix<T> make_band(const Vector<T>& diag, const Vector<T>& upper, const Vector<T>& lower)

@@ -3,7 +3,7 @@
 
 #include "include/Storage/Arrays.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename M>
     class Diagonal_elems : public Array<typename M::value_type>

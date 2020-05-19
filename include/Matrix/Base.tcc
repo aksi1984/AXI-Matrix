@@ -3,7 +3,7 @@
 
 #include "Base.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename C, typename T, typename A, typename Alloc>
     Base<C, T, A, Alloc>::Base() { }
@@ -240,6 +240,20 @@ namespace linalg
     Base<C, T, A, Alloc>::det()
     {
         return math::det(*this);
+    }
+
+    template<typename C, typename T, typename A, typename Alloc>
+    Submatrix<typename Base<C, T, A, Alloc>::self_type>
+    Base<C, T, A, Alloc>::submatrix(const Index<Range>& row_range, const Index<Range>& col_range)
+    {
+        return Submatrix<self_type>(*this, row_range, col_range);
+    }
+
+    template<typename C, typename T, typename A, typename Alloc>
+    Submatrix<typename Base<C, T, A, Alloc>::self_type>
+    Base<C, T, A, Alloc>::submatrix(const Index<Selected>& selected_rows, const Index<Selected>& selected_cols)
+    {
+        return Submatrix<self_type>(*this, selected_rows, selected_cols);
     }
 
     template<typename C, typename T, typename A, typename Alloc>

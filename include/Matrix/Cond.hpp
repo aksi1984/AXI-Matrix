@@ -6,7 +6,7 @@
 
 #include "Aliases.h"
 
-namespace linalg
+namespace axi
 {
     template<typename T, typename C>
     struct is_initializer_list : std::false_type

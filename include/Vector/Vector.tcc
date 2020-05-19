@@ -4,7 +4,7 @@
 #include "include/Vector/Vector.hpp"
 #include "include/Matrix/Expression.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename T, typename C>
     Vector<T, C>::Vector(const allocator_type& alloc) :

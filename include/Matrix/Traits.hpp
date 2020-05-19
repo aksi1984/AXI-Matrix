@@ -8,7 +8,7 @@
 //#include "Container.hpp"
 #include "include/Matrix/Aliases.h"
 
-namespace linalg
+namespace axi
 {
     namespace traits
     {

@@ -3,7 +3,7 @@
 
 #include "Cube_subview.hpp"
 
-namespace linalg
+namespace axi
 {
 
     template<typename CubeType, typename FT>

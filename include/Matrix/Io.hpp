@@ -11,7 +11,7 @@
 #include <iomanip>
 #include <locale>
 
-namespace linalg
+namespace axi
 {
     template<typename Char, typename Traits, typename M>
     std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, const M& mat)

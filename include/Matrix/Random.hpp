@@ -12,7 +12,7 @@
 #include "include/Matrix/Traits.hpp"
 #include "include/Matrix/Cond.hpp"
 
-namespace linalg
+namespace axi
 {
     namespace detail
     {

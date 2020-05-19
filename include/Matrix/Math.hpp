@@ -5,7 +5,7 @@
 #include "include/Matrix/Enums.hpp"
 
 
-namespace linalg
+namespace axi
 {
     namespace math
     {

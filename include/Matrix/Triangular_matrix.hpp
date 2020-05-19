@@ -4,7 +4,7 @@
 #include "include/Matrix/Base.hpp"
 #include "include/Matrix/Triangular_fill.hpp"
 
-namespace linalg
+namespace axi
 {
 
     template<typename T, typename Tr>

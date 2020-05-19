@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace linalg
+namespace axi
 {
     namespace conv
     {

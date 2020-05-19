@@ -8,7 +8,7 @@
 #include <iostream>
 #include <functional>
 
-namespace linalg
+namespace axi
 {
     namespace op
     {

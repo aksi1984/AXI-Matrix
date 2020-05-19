@@ -4,7 +4,7 @@
 #include "Matrix_size.hpp"
 #include <iterator>
 
-namespace linalg
+namespace axi
 {
     template<typename Iterator>
     inline typename std::iterator_traits<Iterator>::difference_type dist(Iterator first, Iterator last)

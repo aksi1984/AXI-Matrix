@@ -12,9 +12,8 @@
 #include "include/Tensor/Cube.hpp"
 #include "include/Tensor/Cube_subview.hpp"
 
-namespace linalg
+namespace axi
 {
-
     namespace detail
     {
         template<typename Char, typename Traits, typename M>
@@ -101,7 +100,7 @@ namespace linalg
 
         auto variant = sub.indexes();
 
-        std::visit(visitor::Index_IO_visitor{}, variant);
+        std::visit(visitor::Index_IO_visitor<Char, Traits>{os}, variant);
 
         os << "\n\n";
 

@@ -5,9 +5,10 @@
 #include "Matrix/Matrix.tcc"
 #include "Matrix/Sparse_matrix.tcc"
 #include "Matrix/Triangular_matrix.tcc"
+#include "Matrix/Submatrix.tcc"
 #include "Tensor/Cube.tcc"
 #include "Tensor/Cube_subview.tcc"
-//#include "Matrix/Io.hpp"
+#include "Matrix/Io.hpp"
 #include "include/IO/IO.hpp"
 
 #endif // LINALG_HPP

@@ -4,7 +4,7 @@
 #include "include/Storage/Arrays.hpp"
 #include "include/Matrix/Iterator.hpp"
 
-namespace linalg
+namespace axi
 {
 
     template<typename Obj, typename A = Array<Obj>, typename Alloc = std::allocator<Obj>>

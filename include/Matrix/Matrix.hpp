@@ -9,7 +9,7 @@
 #include "Unbounded_matrix.tcc"
 
 
-namespace linalg
+namespace axi
 {
     template<typename T>
     class Matrix : public Unbounded_matrix<tags::Dense_matrix_tag, T>

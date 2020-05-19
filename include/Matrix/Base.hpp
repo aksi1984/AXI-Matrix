@@ -7,11 +7,12 @@
 #include "Tags.hpp"
 #include "include/Storage/Arrays.hpp"
 #include "Iterator.hpp"
+#include "Submatrix.hpp"
 #include "Math.hpp"
 #include "Algorithms.hpp"
 #include "Cond.hpp"
 
-namespace linalg
+namespace axi
 {
 
     template<typename M>
@@ -27,7 +28,7 @@ namespace linalg
 
     private:
 
-        using self_type               = Base<T, A, Alloc>;
+        using self_type               = Base<C, T, A, Alloc>;
 
     public:
 
@@ -120,6 +121,10 @@ namespace linalg
         diag_iterator end_diag();
 
         value_type det();
+
+        Submatrix<self_type> submatrix(const Index<Range>& row_index, const Index<Range>& col_index);
+
+        Submatrix<self_type> submatrix(const Index<Selected>& selected_rows, const Index<Selected>& selecteed_cols);
 
         void clear();
 

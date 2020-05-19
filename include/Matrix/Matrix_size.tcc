@@ -3,7 +3,7 @@
 
 #include "Matrix_size.hpp"
 
-namespace linalg
+namespace axi
 {
     Matrix_size::Matrix_size() :
         rows_{},

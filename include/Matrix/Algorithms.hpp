@@ -7,7 +7,7 @@
 #include "Enums.hpp"
 #include "Cond.hpp"
 
-namespace linalg
+namespace axi
 {
     namespace algo
     {

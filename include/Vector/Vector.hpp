@@ -10,7 +10,7 @@
 #include "include/Matrix/Iterator.hpp"
 
 
-namespace linalg
+namespace axi
 {
 
     template<typename T, typename C = Unbounded_array<T>>

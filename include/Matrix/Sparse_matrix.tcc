@@ -3,7 +3,7 @@
 
 #include "Sparse_matrix.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename T>
     Sparse_matrix<T>::Sparse_matrix(const allocator_type& alloc) :

@@ -3,7 +3,7 @@
 
 #include "Triangular_matrix.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename T, typename Tr>
     Triangular_matrix<T, Tr>::Triangular_matrix(const allocator_type& alloc) :
@@ -139,7 +139,7 @@ namespace linalg
         using compare = typename detail::Compare<triangular_fill_type::compare_number, value_type>::type;
         compare comp;
 
-        LINALG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j, "Attempt to change zero index."))
+        LINALG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j, "Attempt to change zero index in triangular matrix."))
 
         return  base::operator()(i, j);
     }
@@ -158,7 +158,7 @@ namespace linalg
         using compare = typename detail::Compare<triangular_fill_type::compare_number, value_type>::type;
         compare comp;
 
-        LINALG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j, "Attempt to change zero index."))
+        LINALG_CHECK(!comp(i, j) && initialized_ == true, Bad_index(i, j, "Attempt to change zero index in triangular matrix."))
 
         return  base::operator()(i, j);
     }

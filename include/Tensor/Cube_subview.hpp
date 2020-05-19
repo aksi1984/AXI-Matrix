@@ -5,7 +5,7 @@
 #include "Cube_subview_elems_fill.hpp"
 #include "include/Common/Visitor.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename M>
     struct Matrix_value_type

@@ -3,7 +3,7 @@
 
 #include "Tensor.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename Obj, typename A, typename Alloc>
     Tensor<Obj, A, Alloc>::Tensor(const allocator_type& alloc) :

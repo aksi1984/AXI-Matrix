@@ -4,7 +4,7 @@
 #include <complex>
 #include "include/Matrix/Traits.hpp"
 
-namespace linalg
+namespace axi
 {
     namespace detail
     {

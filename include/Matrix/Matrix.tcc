@@ -5,7 +5,7 @@
 #include "Container.hpp"
 #include "Matrix_initializer.tcc"
 
-namespace linalg
+namespace axi
 {
     template<typename T>
     Matrix<T>::Matrix(const Matrix_size& req_size, const allocator_type& alloc) :

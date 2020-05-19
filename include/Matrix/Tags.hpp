@@ -1,7 +1,7 @@
 #ifndef TAGS_HPP
 #define TAGS_HPP
 
-namespace linalg
+namespace axi
 {
     namespace tags
     {

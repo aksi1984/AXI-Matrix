@@ -13,7 +13,7 @@
 #include "include/Exceptions/Exception.hpp"
 
 
-namespace linalg
+namespace axi
 {
 
     template<typename T, typename C>

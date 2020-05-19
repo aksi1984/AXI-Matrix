@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 
-namespace linalg
+namespace axi
 {
     template<typename T, typename Alloc = std::allocator<T>>
     class Array

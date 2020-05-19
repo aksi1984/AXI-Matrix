@@ -6,7 +6,7 @@
 #include "include/Matrix/Cond.hpp"
 #include "Cube_subview.hpp"
 
-namespace linalg
+namespace axi
 {
     template<typename Mat>
     class Cube : public Tensor<Mat>

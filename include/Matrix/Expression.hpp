@@ -9,7 +9,7 @@
 #include "include/Exceptions/Exception.hpp"
 #include "include/Matrix/Aliases.h"
 
-namespace linalg
+namespace axi
 {
 
     template<std::size_t N, typename... Ts>
