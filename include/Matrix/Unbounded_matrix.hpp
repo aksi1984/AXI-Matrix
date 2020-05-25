@@ -33,10 +33,6 @@ namespace axi
 
         explicit Unbounded_matrix(const Matrix_size& mat_size, const allocator_type& alloc = allocator_type());
 
-
-
-        //explicit Unbounded_matrix(Random_ptr<typename traits::Get_type<is_complex<T>::value, T>::type> random, const allocator_type& alloc = allocator_type());
-
         template<typename U, typename = std::enable_if_t< std::is_same_v<U, typename traits::Get_type<is_complex<T>::value, T>::type> >>
         explicit Unbounded_matrix(size_type req_rows, size_type req_cols, Random<U> random, const allocator_type& alloc = allocator_type());
 

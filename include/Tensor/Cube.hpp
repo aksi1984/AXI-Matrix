@@ -4,7 +4,8 @@
 #include "include/Tensor/Tensor.tcc"
 #include "include/Matrix/Matrix_size.hpp"
 #include "include/Matrix/Cond.hpp"
-#include "Cube_subview.hpp"
+#include "Subcube.hpp"
+#include "include/Matrix/Operations.hpp"
 
 namespace axi
 {
@@ -58,9 +59,59 @@ namespace axi
         template<typename OtherMat>
         Cube& operator=(Cube<OtherMat>&& rhs) = delete;
 
-        std::vector<mat_value_type> row(size_type row, size_type slice);
+        template<typename FT>
+        Subcube<self_type, FT> subcube(size_type elem_first, size_type elem_last);
+
+        template<typename FT>
+        Subcube<self_type, FT> subcube(size_type elem);
+
+        Cube& operator+=(const Cube& rhs);
+
+        Cube& operator-=(const Cube& rhs);
+
+        Cube& operator*=(const Cube& rhs);
+
+        Cube& operator*=(mat_value_type rhs);
+
+        Cube& operator/=(mat_value_type rhs);
 
     };
+
+    template<typename Mat>
+    Cube<Mat> operator+(const Cube<Mat>& lhs, const Cube<Mat>& rhs)
+    {
+        return op::Plus<Cube<Mat>, Cube<Mat>, op::Op_cube>()(lhs, rhs);
+    }
+
+    template<typename Mat>
+    Cube<Mat> operator-(const Cube<Mat>& lhs, const Cube<Mat>& rhs)
+    {
+        return op::Minus<Cube<Mat>, Cube<Mat>, op::Op_cube>()(lhs, rhs);
+    }
+
+    template<typename Mat>
+    Cube<Mat> operator*(const Cube<Mat>& lhs, const Cube<Mat>& rhs)
+    {
+        return op::Multiplies<Cube<Mat>, Cube<Mat>, op::Op_cube>()(lhs, rhs);
+    }
+
+    template<typename Mat>
+    Cube<Mat> operator*(const Cube<Mat>& lhs, typename Mat::value_type rhs)
+    {
+        return op::Scalar_multiplies<Cube<Mat>, Cube<Mat>, op::Op_cube>()(lhs, rhs);
+    }
+
+    template<typename Mat>
+    Cube<Mat> operator/(const Cube<Mat>& lhs, typename Mat::value_type rhs)
+    {
+        return op::Scalar_divide<Cube<Mat>, Cube<Mat>, op::Op_cube>()(lhs, rhs);
+    }
+
+    template<typename Mat>
+    bool operator==(const Cube<Mat>& lhs, const Cube<Mat>& rhs)
+    {
+        return op::Equal<Cube<Mat>, Cube<Mat>, op::Op_cube>()(lhs, rhs);
+    }
 
 } // namespace linalg
 

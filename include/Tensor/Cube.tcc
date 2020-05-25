@@ -76,13 +76,69 @@ namespace axi
     }
 
     template<typename Mat>
-    std::vector<typename Cube<Mat>::mat_value_type>
-    Cube<Mat>::row(size_type row, size_type slice)
-    {
-        for(auto x : base::operator[](slice))
+        template<typename FT>
+        Subcube<typename Cube<Mat>::self_type, FT>
+        Cube<Mat>::subcube(size_type elem_first, size_type elem_last)
         {
-
+            return Subcube<self_type, FT>(*this, elem_first, elem_last);
         }
+
+    template<typename Mat>
+        template<typename FT>
+        Subcube<typename Cube<Mat>::self_type, FT>
+        Cube<Mat>::subcube(size_type elem)
+        {
+            return Subcube<self_type, FT>(*this, elem);
+        }
+
+    template<typename Mat>
+    Cube<Mat>&
+    Cube<Mat>::operator+=(const Cube& rhs)
+    {
+        Cube result = op::Plus<self_type, self_type, op::Op_cube>()(*this, rhs);
+        *this = result;
+
+        return *this;
+    }
+
+    template<typename Mat>
+    Cube<Mat>&
+    Cube<Mat>::operator-=(const Cube& rhs)
+    {
+        Cube result = op::Minus<self_type, self_type, op::Op_cube>()(*this, rhs);
+        *this = result;
+
+        return *this;
+    }
+
+    template<typename Mat>
+    Cube<Mat>&
+    Cube<Mat>::operator*=(const Cube& rhs)
+    {
+        Cube result = op::Multiplies<self_type, self_type, op::Op_cube>()(*this, rhs);
+        *this = result;
+
+        return *this;
+    }
+
+    template<typename Mat>
+    Cube<Mat>&
+    Cube<Mat>::operator*=(mat_value_type rhs)
+    {
+        Cube result = op::Scalar_multiplies<self_type, mat_value_type, op::Op_cube>()(*this, rhs);
+        *this = result;
+
+        return *this;
+    }
+
+    template<typename Mat>
+    Cube<Mat>&
+    Cube<Mat>::operator/=(mat_value_type rhs)
+    {
+        Cube result = op::Scalar_divide<self_type, mat_value_type, op::Op_cube>()(*this, rhs);
+        *this = result;
+
+        return result;
     }
 
 } // namespace linalg

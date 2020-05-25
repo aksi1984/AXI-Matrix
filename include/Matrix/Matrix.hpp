@@ -124,6 +124,41 @@ namespace axi
         void copy_from_other_mat(const Matrix<U>& mat);
 
     };
+
+    template<typename T>
+    Matrix<T> operator+(const Matrix<T>& lhs, const Matrix<T>& rhs)
+    {
+        using current_type = Matrix<T>;
+        return  op::Plus<current_type, current_type, op::Op_matrix>()(lhs, rhs);
+    }
+
+    template<typename T>
+    Matrix<T> operator-(const Matrix<T>& lhs, const Matrix<T>& rhs)
+    {
+        using current_type = Matrix<T>;
+        return op::Minus<current_type, current_type, op::Op_matrix>()(lhs, rhs);
+    }
+
+    template<typename T>
+    Matrix<T> operator*(const Matrix<T>& lhs, const Matrix<T>& rhs)
+    {
+        using current_type = Matrix<T>;
+        return op::Multiplies<current_type, current_type, op::Op_matrix>()(lhs, rhs);
+    }
+
+    template<typename T>
+    Matrix<T> operator*(const Matrix<T>& lhs, const T& scalar)
+    {
+        using current_type = Matrix<T>;
+        return op::Scalar_multiplies<current_type, T, op::Op_matrix>()(lhs, scalar);
+    }
+
+    template<typename T>
+    bool operator==(const Matrix<T>& lhs, const Matrix<T>& rhs)
+    {
+        using type = Matrix<T>;
+        return op::Equal<type, type, op::Op_matrix>()(lhs, rhs);
+    }
 }
 
 #endif // MATRIX_HPP

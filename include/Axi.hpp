@@ -7,8 +7,7 @@
 #include "Matrix/Triangular_matrix.tcc"
 #include "Matrix/Submatrix.tcc"
 #include "Tensor/Cube.tcc"
-#include "Tensor/Cube_subview.tcc"
-#include "Matrix/Io.hpp"
+#include "Tensor/Subcube.tcc"
 #include "include/IO/IO.hpp"
 
 #endif // LINALG_HPP

@@ -10,7 +10,7 @@
 #include "include/Matrix/Triangular_matrix.hpp"
 #include "include/Matrix/Submatrix.hpp"
 #include "include/Tensor/Cube.hpp"
-#include "include/Tensor/Cube_subview.hpp"
+#include "include/Tensor/Subcube.hpp"
 
 namespace axi
 {
@@ -123,11 +123,11 @@ namespace axi
     }
 
     template<typename Char, typename Traits, typename C, typename L>
-    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, Cube_subview<C, L> subview)
+    std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& os, Subcube<C, L> subview)
     {
         std::string fill_type_str = ( std::is_same_v<L, Row> ? "rows" : "cols" );
 
-        os << "Cube subview<" << fill_type_str << "> {" << subview.slices() << "}\n\n";
+        os << "Cube subview<" << fill_type_str << ">, slices: " << subview.slices() << "\n\n";
 
         for(std::size_t i = 0; i < subview.slices(); ++i)
         {

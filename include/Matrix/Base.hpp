@@ -59,7 +59,6 @@ namespace axi
 
         Base(size_type req_rows, size_type req_cols, const allocator_type& alloc = allocator_type());
 
-
         Base(const Matrix_size& mat_size, const allocator_type& alloc);
 
         Base(const Base& copy);

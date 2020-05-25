@@ -28,12 +28,12 @@ namespace axi
     {
 
         Incompatible_size(const std::string& m, std::size_t rows_1, std::size_t cols_1, std::size_t rows_2, std::size_t cols_2) :
-            Exception_base<std::runtime_error>(m + ": incompatible matrix dimensions: (" +
+            Exception_base<std::runtime_error>(m + " incompatible matrix dimensions: (" +
                                std::to_string(rows_1) + "x" + std::to_string(cols_1) +
                                ") and (" + std::to_string(rows_2) + "x" + std::to_string(cols_2) + ")") { }
 
         Incompatible_size(const std::string& m, std::size_t size_1, std::size_t size_2) :
-            Exception_base<std::runtime_error>(m + ": incompatible vector dimensions: (" + std::to_string(size_1) +
+            Exception_base<std::runtime_error>(m + " (" + std::to_string(size_1) +
                                ") and (" + std::to_string(size_2) + ")")   { }
 
         Incompatible_size() :

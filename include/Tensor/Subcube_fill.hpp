@@ -33,7 +33,7 @@ namespace axi
         template<typename MatType>
         static void fill(MatType& mat, std::size_t first_row, std::size_t last_row, typename MatType::value_type value)
         {
-            for(std::size_t i = first_row, dest_row_count = 0; i < last_row; ++i, ++dest_row_count)
+            for(std::size_t i = first_row; i < last_row; ++i)
             {
                 for(auto row_iter = mat.begin_row(i); row_iter != mat.end_row(i); ++row_iter)
                 {
@@ -45,7 +45,6 @@ namespace axi
 
     struct Col
     {
-
         template<typename MatType>
         static Matrix<typename MatType::value_type> get(MatType src, std::size_t first_col, std::size_t last_col)
         {
@@ -65,6 +64,18 @@ namespace axi
             }
 
             return dest;
+        }
+
+        template<typename MatType>
+        static void fill(MatType& mat, std::size_t first_col, std::size_t last_col, typename MatType::value_type value)
+        {
+            for(std::size_t i = first_col; i < last_col; ++i)
+            {
+                for(auto row_iter = mat.begin_col(i); row_iter != mat.end_col(i); ++row_iter)
+                {
+                    *row_iter = value;
+                }
+            }
         }
 
     };

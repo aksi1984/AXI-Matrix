@@ -303,7 +303,7 @@ namespace axi
     Base<C, T, A, Alloc>&
     Base<C, T, A, Alloc>::operator+=(const Base<C, T, A, Alloc>& rhs)
     {
-        Base<T, A, Alloc> result = op::Plus<self_type, self_type>()(*this, rhs);
+        Base<T, A, Alloc> result = op::Plus<self_type, self_type, op::Op_matrix>()(*this, rhs);
         *this = result;
 
         return *this;
@@ -313,7 +313,7 @@ namespace axi
     Base<C, T, A, Alloc>&
     Base<C, T, A, Alloc>::operator-=(const Base<C, T, A, Alloc>& rhs)
     {
-        Base<C, T, A, Alloc> result = op::Minus<self_type, self_type>()(*this, rhs);
+        Base<C, T, A, Alloc> result = op::Minus<self_type, self_type, op::Op_matrix>()(*this, rhs);
         *this = result;
 
         return *this;
@@ -323,7 +323,7 @@ namespace axi
     Base<C, T, A, Alloc>&
     Base<C, T, A, Alloc>::operator*=(const Base<C, T, A, Alloc>& rhs)
     {
-        Base<C, T, A, Alloc> result = op::Multiplies<self_type, self_type>()(*this, rhs);
+        Base<C, T, A, Alloc> result = op::Multiplies<self_type, self_type, op::Op_matrix>()(*this, rhs);
         *this = result;
 
         return *this;
@@ -333,7 +333,7 @@ namespace axi
     Base<C, T, A, Alloc>&
     Base<C, T, A, Alloc>::operator*=(const value_type& scalar)
     {
-        Base<C, T, A, Alloc> result = op::Scalar_multiplies<self_type, value_type>()(*this, scalar);
+        Base<C, T, A, Alloc> result = op::Scalar_multiplies<self_type, value_type, op::Op_matrix>()(*this, scalar);
         *this = result;
 
         return *this;
@@ -397,44 +397,6 @@ namespace axi
             }
         }
     }
-
-    //Ops
-
-    template<typename C, typename T, typename A, typename Alloc>
-    Base<C, T, A, Alloc> operator+(const Base<C, T, A, Alloc>& lhs, const Base<C, T, A, Alloc>& rhs)
-    {
-        using current_type = Base<T, C, Alloc>;
-        return  op::Plus<current_type, current_type>()(lhs, rhs);
-    }
-
-    template<typename C, typename T, typename A, typename Alloc>
-    Base<C, T, A, Alloc> operator-(const Base<C, T, A, Alloc>& lhs, const Base<C, T, A, Alloc>& rhs)
-    {
-        using current_type = Base<T, C, Alloc>;
-        return op::Minus<current_type, current_type>()(lhs, rhs);
-    }
-
-    template<typename C, typename T, typename A, typename Alloc>
-    Base<C, T, A, Alloc> operator*(const Base<C, T, A, Alloc>& lhs, const Base<C, T, A, Alloc>& rhs)
-    {
-        using current_type = Base<C, T, A, Alloc>;
-        return op::Multiplies<current_type, current_type>()(lhs, rhs);
-    }
-
-    template<typename C, typename T, typename A, typename Alloc>
-    Base<C, T, A, Alloc> operator*(const Base<C, T, A, Alloc>& lhs, const T& scalar)
-    {
-        using current_type = Base<C, T, A, Alloc>;
-        return op::Scalar_multiplies<current_type, T>()(lhs, scalar);
-    }
-
-    template<typename C, typename T, typename A, typename Alloc>
-    bool operator==(const Base<C, T, A, Alloc>& lhs, const Base<C, T, A, Alloc>& rhs)
-    {
-        using type = Base<C, T, A, Alloc>;
-        return op::Equal<type, type>()(lhs, rhs);
-    }
-
 }
 
 #endif // BASE_TCC

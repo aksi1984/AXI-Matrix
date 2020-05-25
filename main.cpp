@@ -7,36 +7,30 @@
 #include <chrono>
 #include <regex>
 #include <list>
+#include <chrono>
 
 #include "include/Axi.hpp"
 
-
-
-template<typename T>
-using cube = axi::Cube<axi::Matrix<T>>;
-
-using mat_ptr = std::shared_ptr<axi::Matrix<int>>;
-
-using tr_int = axi::Triangular_matrix<int, axi::Upper>;
-
 int main()
 {
-    tr_int tr(5, 5);
+    /*arma::cube C_1 = arma::randu(3,4,3);
+    arma::cube C_2 = arma::randu(3,4,3);
+    arma::mat M = arma::randu(3, 4);
 
+    std::cout << C_1;
+    auto tube = C_1.tube(0, 0);
+    std::cout << "\n";
+    std::cout << tube;*/
 
-    axi::Submatrix<tr_int> SM(tr, axi::Index<axi::Range>{0, 2}, axi::Index<axi::Range>{1, 2});
-    SM.fill(1);
-    //auto SM = M.submatrix(axi::Index<axi::Selected>{1, 3}, axi::Index<axi::Selected>{0, 1});
+    axi::Cube<axi::Matrix<int>> c_1(axi::Matrix_size(3, 4), 3, axi::Random<int>(1, 9));
+    axi::Cube<axi::Matrix<int>> c_2(axi::Matrix_size(4, 3), 3, axi::Random<int>(1, 9));
 
-    //std::cout << "\n\n";
+    axi::Matrix<int> m_1(3,4);
+    axi::Matrix<int> m_2(3,4);
 
-    //SM.fill(1);
-    //std::cout << M;
+    auto c = c_1 + c_2;
+    std::cout << m_3;
 
-    std::cout << SM;
-
-
-    //std::cout << SM;
 
     return 0;
 }

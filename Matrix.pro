@@ -54,9 +54,9 @@ HEADERS += \
     include/Storage/Arrays.hpp \
     include/Tensor/Cube.hpp \
     include/Tensor/Cube.tcc \
-    include/Tensor/Cube_subview.hpp \
-    include/Tensor/Cube_subview.tcc \
-    include/Tensor/Cube_subview_elems_fill.hpp \
+    include/Tensor/Subcube.hpp \
+    include/Tensor/Subcube.tcc \
+    include/Tensor/Subcube_fill.hpp \
     include/Tensor/Tensor.hpp \
     include/Tensor/Tensor.tcc \
     include/Tensor/Tensor_size.hpp \

@@ -2,7 +2,7 @@
 #define CUBE_SUBVIEW_HPP
 
 #include "Cube.hpp"
-#include "Cube_subview_elems_fill.hpp"
+#include "Subcube_fill.hpp"
 #include "include/Common/Visitor.hpp"
 
 namespace axi
@@ -16,7 +16,7 @@ namespace axi
     ////////////////////////////////////////
 
     template<typename CubeType, typename FT>
-    class Cube_subview : public Tensor<Matrix<typename Matrix_value_type<typename CubeType::value_type>::type>>
+    class Subcube : public Tensor<Matrix<typename Matrix_value_type<typename CubeType::value_type>::type>>
     {
     private:
 
@@ -30,11 +30,11 @@ namespace axi
         using size_type         = std::size_t;
         using allocator_type    = typename base::allocator_type;
 
-        Cube_subview();
+        Subcube();
 
-        Cube_subview(CubeType* cube_ptr, size_type elem);
+        Subcube(CubeType& cube_, size_type elem);
 
-        Cube_subview(CubeType* cube_ptr, size_type elem_first, size_type elem_last);
+        Subcube(CubeType& cube_, size_type elem_first, size_type elem_last);
 
         void fill(value_type value);
 
@@ -49,7 +49,7 @@ namespace axi
 
         std::variant<size_type, std::pair<size_type, size_type>> elems_;
 
-        CubeType* cube_ptr_;
+        CubeType& cube_;
 
     };
 
